@@ -1,0 +1,42 @@
+.navbar {
+	padding: .5rem 1.5rem;
+}
+
+.main-div {
+	width:90%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 1rem;
+}
+
+.search-bar {
+	width:100%;
+	padding: 0;
+	display:inline-block;
+	margin:auto;
+}
+
+.store-inventory {
+	margin:auto;
+	width:100%;
+}
+
+.dropdown {
+	display:inline-block;
+	margin-left: 0.5rem;
+}
+
+.form-check {
+	padding: 0.4rem 0rem 0.4rem 2rem;
+}
+
+.pet-info-small {
+	text-align: center;
+	margin-top:1rem;
+	margin-bottom:2rem;
+}
+
+.pet-thumbnail-small {
+	width:15rem;
+	margin: 1rem;
+}
