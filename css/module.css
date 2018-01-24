@@ -67,3 +67,12 @@
 	width: 1rem !important;
     height: 1rem;
 }
+
+.pet-modal-img {
+	height:10rem;
+	width:12rem;
+}
+
+.p-without-margin-bottom {
+	margin-bottom: 0;
+}

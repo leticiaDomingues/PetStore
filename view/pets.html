@@ -35,16 +35,16 @@
 		</div>
 	</div>
 	<div class="store-inventory">
-		<div class="row" >
+		<div class="row">
 			<div class="col-3 pet-info-small" ng-repeat="pet in petsCtrl.pets">
 				<div class="pet-thumbnail-div">
 					<i class="left-arrow fa fa-angle-left" aria-hidden="true" ng-show="{{pet.photoUrls.length > 1}}"></i>
 			    	<img data-ng-src="{{pet.photoUrls[pet.photoIndex]}}" class="pet-thumbnail-small">
 			    	<span  ng-click="petsCtrl.changePetThumbnail($index)"><i class="right-arrow fa fa-angle-right" aria-hidden="true" ng-show="{{pet.photoUrls.length > 1}}"></i></span>
 			    </div>
-		    	<p class="pet-info-name">{{pet.name}}</p>
+		    	<p class="bold">{{pet.name}}</p>
 		    	<p class="pet-info-category">{{pet.category.name}}</p>
-		    	<a href="#/pet-details/{{pet.id}}" class="btn btn-outline-secondary pet-info-button">Ver detalhes</a>
+		    	<button class="btn btn-outline-secondary pet-info-button" ng-click="petsCtrl.openPetDetailsModal($index)">Ver detalhes</button>
 		    </div>		    
 		 </div>
 		 
@@ -62,4 +62,34 @@
 	    </li>
 	  </ul>
 	</nav>
+
+	<!-- Pet detail modal -->
+	<div class="modal fade" id="petDetailsModal" tabindex="-1" role="dialog" aria-labelledby="petDetailsModal" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title">Detalhes do pet</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body row">
+	      	<div class="pet-modal-picture col-5">
+	      		<img ng-src="{{petsCtrl.clickedPet.photoUrls[0]}}" class="pet-modal-img">
+	      	</div>
+	      	<div class="pet-modal-body col-7">
+		        <p class="p-without-margin-bottom"><span class='bold'>Nome: </span> {{petsCtrl.clickedPet.name}}</p>
+		        <p class="pet-info-category"><span class='bold'>Categoria: </span> {{petsCtrl.clickedPet.category.name}}</p>
+				<p class="p-without-margin-bottom"><span class='bold'>Raça: </span> {{petsCtrl.clickedPet.tags[0].name}}</p>
+				<p class="p-without-margin-bottom"><span class='bold'>Idade: </span> {{petsCtrl.clickedPet.tags[1].name}}</p>
+				<p class="p-without-margin-bottom"><span class='bold'>Sexo: </span> {{petsCtrl.clickedPet.tags[2].name}}</p>
+		    </div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Fechar</button>
+	        <a href="#/makeOrder/{{petsCtrl.clickedPet.id}}" ng-click="petsCtrl.closePetDetailsModal()" class="btn btn-secondary">Comprar</a>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 </div>
