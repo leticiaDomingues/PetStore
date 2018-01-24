@@ -4,20 +4,21 @@
 	<title>PetStore</title>
 
 	<!-- Bootstrap css import -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="lib/bootstrap-4.0.0/css/bootstrap.min.css">
+
+
 	<link rel="stylesheet" href="css/module.css">
 	<link rel="stylesheet" href="css/theme.css">
 </head>
 <body ng-app='app'>
 	<!-- Menu -->
 	<nav class="navbar navbar-light bg-light">
-		<a class="navbar-brand" href="#">
+		<a class="navbar-brand" href="#/">
 			 <img src="images/paw.png" width="35" height="30" class="d-inline-block align-top" alt="">
 			PetStore
 		</a><meta charset="UTF-8">
 		<span class="navbar-text">
-	    	<a href="#">Cadastre-se</a> ou faça <a href="#">login</a>.
+	    	<a href="#/">Cadastre-se</a> ou faça <a href="#/">login</a>.
 	    </span>
 	</nav>
 
@@ -33,13 +34,17 @@
 	<script src="lib/jquery-3.3.1/jquery.js"></script>
 
 	<!-- Bootstrap js import -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+	<script src="lib/popper-1.11.0/umd/popper.min.js"></script>
+	<script src="lib/bootstrap-4.0.0/js/bootstrap.min.js"></script>
 
+	<!-- Font Awesome icons import -->
+	<script src="lib/font-awesome-5.0.4/fontawesome-all.min.js"></script>
 
 	<script src="js/app.module.js"></script>
+	<script src="js/app.config.js"></script>
 	<script src="js/app.routes.js"></script>
+	<script src="js/services/pets.js"></script>
 	<script src="js/controllers/pets.js"></script>
+
 </body>
 </html>
