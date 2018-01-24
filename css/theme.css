@@ -1,3 +1,17 @@
 .page-link {
 	color: rgba(0,0,0,.9);
 }
+
+.pet-info-name {
+	font-weight: bold;
+}
+
+.pet-info-category {
+	text-transform: capitalize;
+}
+
+
+.left-arrow, .right-arrow {
+	color: #6c757d;
+	cursor: pointer;
+}

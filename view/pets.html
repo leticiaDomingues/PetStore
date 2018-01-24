@@ -1,4 +1,4 @@
-<div ng-controller='PetsController as pets' class="main-div">
+<div ng-controller='PetsController as petsCtrl' class="main-div">
 	<div class="search-bar">
 		<div class="input-group">
 			<div class="input-group-prepend">
@@ -35,50 +35,19 @@
 		</div>
 	</div>
 	<div class="store-inventory">
-		<div class="row">
-			<div class="col-3 pet-info-small">
-		    	<img src="https://cmeimg-a.akamaihd.net/640/photos.demandstudios.com/getty/article/152/69/490612157.jpg" class="pet-thumbnail-small"> 
-		    	<p class="pet-info-name">Nina</p>
-		    	<button type="button" class="btn btn-outline-secondary">Ver detalhes</button>
-		    </div>
-		    <div class="col-3 pet-info-small">
-		    	<img src="https://cmeimg-a.akamaihd.net/640/photos.demandstudios.com/getty/article/152/69/490612157.jpg" class="pet-thumbnail-small"> 
-		    	<p class="pet-info-name">Nina</p>
-		    	<button type="button" class="btn btn-outline-secondary">Ver detalhes</button>
-		    </div>
-		    <div class="col-3 pet-info-small">
-		    	<img src="https://cmeimg-a.akamaihd.net/640/photos.demandstudios.com/getty/article/152/69/490612157.jpg" class="pet-thumbnail-small"> 
-		    	<p class="pet-info-name">Nina</p>
-		    	<button type="button" class="btn btn-outline-secondary">Ver detalhes</button>
-		    </div>
-		    <div class="col-3 pet-info-small">
-		    	<img src="https://cmeimg-a.akamaihd.net/640/photos.demandstudios.com/getty/article/152/69/490612157.jpg" class="pet-thumbnail-small"> 
-		    	<p class="pet-info-name">Nina</p>
-		    	<button type="button" class="btn btn-outline-secondary">Ver detalhes</button>
-		    </div>
-		  </div>
-		  <div class="row">
-			<div class="col-3 pet-info-small">
-		    	<img src="https://cmeimg-a.akamaihd.net/640/photos.demandstudios.com/getty/article/152/69/490612157.jpg" class="pet-thumbnail-small"> 
-		    	<p class="pet-info-name">Nina</p>
-		    	<button type="button" class="btn btn-outline-secondary">Ver detalhes</button>
-		    </div>
-		    <div class="col-3 pet-info-small">
-		    	<img src="https://cmeimg-a.akamaihd.net/640/photos.demandstudios.com/getty/article/152/69/490612157.jpg" class="pet-thumbnail-small"> 
-		    	<p class="pet-info-name">Nina</p>
-		    	<button type="button" class="btn btn-outline-secondary">Ver detalhes</button>
-		    </div>
-		    <div class="col-3 pet-info-small">
-		    	<img src="https://cmeimg-a.akamaihd.net/640/photos.demandstudios.com/getty/article/152/69/490612157.jpg" class="pet-thumbnail-small"> 
-		    	<p class="pet-info-name">Nina</p>
-		    	<button type="button" class="btn btn-outline-secondary">Ver detalhes</button>
-		    </div>
-		    <div class="col-3 pet-info-small">
-		    	<img src="https://cmeimg-a.akamaihd.net/640/photos.demandstudios.com/getty/article/152/69/490612157.jpg" class="pet-thumbnail-small"> 
-		    	<p class="pet-info-name">Nina</p>
-		    	<button type="button" class="btn btn-outline-secondary">Ver detalhes</button>
-		    </div>
-		  </div>
+		<div class="row" >
+			<div class="col-3 pet-info-small" ng-repeat="pet in petsCtrl.pets">
+				<div class="pet-thumbnail-div">
+					<i class="left-arrow fa fa-angle-left" aria-hidden="true" ng-show="{{pet.photoUrls.length > 1}}"></i>
+			    	<img data-ng-src="{{pet.photoUrls[pet.photoIndex]}}" class="pet-thumbnail-small">
+			    	<span  ng-click="petsCtrl.changePetThumbnail($index)"><i class="right-arrow fa fa-angle-right" aria-hidden="true" ng-show="{{pet.photoUrls.length > 1}}"></i></span>
+			    </div>
+		    	<p class="pet-info-name">{{pet.name}}</p>
+		    	<p class="pet-info-category">{{pet.category.name}}</p>
+		    	<a href="#/pet-details/{{pet.id}}" class="btn btn-outline-secondary pet-info-button">Ver detalhes</a>
+		    </div>		    
+		 </div>
+		 
 	</div>
 	<nav aria-label="Page navigation example">
 	  <ul class="pagination justify-content-center">
