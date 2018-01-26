@@ -12,10 +12,10 @@
 			<p class="p-few-margin-bottom"><span class='bold'>Raça: </span> {{mOrderCtrl.pet.tags[0].name}}</p>
 			<p class="p-few-margin-bottom"><span class='bold'>Idade: </span> {{mOrderCtrl.pet.tags[1].name}}</p>
 			<p><span class='bold'>Sexo: </span> {{mOrderCtrl.pet.tags[2].name}}</p>
-			<p><span class='bold'>Data de entrega: </span> <input type="date" value="{{mOrderCtrl.shipDate}}"></p>
+			<p><span class='bold'>Data de entrega: </span> <input type="date" ng-model="mOrderCtrl.shipDate"></p>
 
 			<div class="pet-order-buy-button ">
-				<button class="btn btn-secondary btn-lg">Comprar</button>
+				<button class="btn btn-secondary btn-lg" ng-click="mOrderCtrl.makeOrder()">Comprar</button>
 			</div>
 		</div>
 	</div>

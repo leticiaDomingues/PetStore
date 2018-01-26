@@ -10,7 +10,7 @@
 	function petsController(PetsService) {
 		var self = this;
 
-		self.pets = PetsService.query({findByStatus: 'findByStatus', status: 'disponivel'});
+		self.pets = PetsService.query({pet: 'pet', findByStatus: 'findByStatus', status: 'disponivel'});
 		self.pets.$promise.then(function() {
 			self.pets.forEach(function(pet) { pet.photoIndex = 0 });
 		}, function() {});
