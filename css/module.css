@@ -76,3 +76,45 @@
 .p-without-margin-bottom {
 	margin-bottom: 0;
 }
+
+.p-few-margin-bottom {
+	margin-bottom: .2rem;
+}
+
+.pet-order-image {
+	width:26rem;
+	height:24rem;
+}
+
+.pet-order-image-div {
+	text-align: center;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.div-inline-block {
+	display:inline-block;
+	flex:1;
+}
+
+.pet-order-details {
+	margin-left:2rem;
+	position: relative;
+}
+
+.pet-order-body {
+	margin-top: 4rem;
+	font-size: 1.4rem;
+	display:flex;
+}
+
+.pet-order-buy-button {
+	position: absolute;
+ 	bottom: 0;
+ 	right: 4rem;
+}
+
+.arrows {
+	height: 10rem;
+}

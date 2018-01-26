@@ -10,6 +10,9 @@
 		$routeProvider
 			.when('/', {
 				templateUrl : 'view/pets.html'
+			})
+			.when('/makeOrder/:id', {
+				templateUrl : 'view/make-order.html'
 			});	
 	}
 })();

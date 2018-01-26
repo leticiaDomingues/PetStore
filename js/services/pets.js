@@ -10,9 +10,9 @@
 
 	function petsService($resource) {
 		return $resource(
-			'http://petstore.swagger.io/v2' + '/pet/findByStatus/',
+			'http://petstore.swagger.io/v2' + '/pet/:findByStatus/:order/:id',
 			{
-		      status : status
+		      	status : status
 		    }
 		);
 	}

@@ -1,0 +1,22 @@
+<div ng-controller='MakeOrderController as mOrderCtrl' class="main-div">
+	<h2 class="pet-title">Detalhes da compra</h2>
+	<div class="pet-order-body">
+		<div class="pet-order-image-div col-5 offset-1">
+			<div class='div-inline-block' ng-click='mOrderCtrl.changeImage("prev")'><i class="left-arrow arrows fa fa-angle-left" aria-hidden="true"></i></div>
+			<img ng-src="{{mOrderCtrl.pet.photoUrls[mOrderCtrl.photoIndex]}}" class="pet-order-image">
+			<div class='div-inline-block' ng-click='mOrderCtrl.changeImage("next")'><i class="right-arrow arrows fa fa-angle-right" aria-hidden="true"></i></div>	    	
+		</div>
+		<div class="pet-order-details div-inline-block col-5">
+			<p class="p-few-margin-bottom"><span class='bold'>Nome: </span> {{mOrderCtrl.pet.name}}</p>
+	        <p class="pet-info-category"><span class='bold'>Categoria: </span> {{mOrderCtrl.pet.category.name}}</p>
+			<p class="p-few-margin-bottom"><span class='bold'>Raça: </span> {{mOrderCtrl.pet.tags[0].name}}</p>
+			<p class="p-few-margin-bottom"><span class='bold'>Idade: </span> {{mOrderCtrl.pet.tags[1].name}}</p>
+			<p><span class='bold'>Sexo: </span> {{mOrderCtrl.pet.tags[2].name}}</p>
+			<p><span class='bold'>Data de entrega: </span> <input type="date" value="{{mOrderCtrl.shipDate}}"></p>
+
+			<div class="pet-order-buy-button ">
+				<button class="btn btn-secondary btn-lg">Comprar</button>
+			</div>
+		</div>
+	</div>
+</div>

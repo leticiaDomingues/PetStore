@@ -39,7 +39,7 @@
 			<div class="col-3 pet-info-small" ng-repeat="pet in petsCtrl.pets">
 				<div class="pet-thumbnail-div">
 					<i class="left-arrow fa fa-angle-left" aria-hidden="true" ng-show="{{pet.photoUrls.length > 1}}"></i>
-			    	<img data-ng-src="{{pet.photoUrls[pet.photoIndex]}}" class="pet-thumbnail-small">
+			    	<img ng-src="{{pet.photoUrls[pet.photoIndex]}}" class="pet-thumbnail-small">
 			    	<span  ng-click="petsCtrl.changePetThumbnail($index)"><i class="right-arrow fa fa-angle-right" aria-hidden="true" ng-show="{{pet.photoUrls.length > 1}}"></i></span>
 			    </div>
 		    	<p class="bold">{{pet.name}}</p>
