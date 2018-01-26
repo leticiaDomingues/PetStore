@@ -19,3 +19,11 @@
 .pet-title {
 	text-align:center;
 }
+
+.pet-body {
+	text-align:left;
+}
+
+.red-font {
+	color: red;
+}

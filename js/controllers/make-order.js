@@ -31,37 +31,37 @@
 			}
 		};
 
-
 		self.makeOrder = function() {
 			//order object with the correct data
 			self.order = PetsService.get({store: 'store', order: 'order', id:3});
 			self.order.$promise.then(function() {
-				self.order.id = self.generateId();
+				//self.order.id = self.generateId();
+				//TODO: ID!!!
 				self.order.petId = self.pet.id;
 				self.order.quantity = 1;
 				self.order.shipDate = self.shipDate;
 				self.status = 'placed';
 				self.complete = 'false';
-			}, function() {});
-			
-			//POST request
-			self.result = PetsService.save(
-				{
-					store: 'store',
-					order: 'order'
-				}, 
-				JSON.parse(angular.toJson(self.order)),
-				//caso tenha sucesso
-				function(data, status, headers, config) {
-					$location.path('/');
-				},
-				//caso tenha falha
-				function(data) {
-					console.log(data);
-				}
-			);
-		};
 
+				//POST request
+				self.result = PetsService.save(
+					{
+						store: 'store',
+						order: 'order'
+					}, 
+					JSON.parse(angular.toJson(self.order)),
+					//caso tenha sucesso
+					function(data, status, headers, config) {
+						console.log(data);
+						$location.path('/orderPlaced/' + self.order.id);
+					},
+					//caso tenha falha
+					function(data) {
+						console.log(data);
+					}
+				);
+			}, function() {});
+		};
 
 		self.generateId = function() {
 			let text = "";
