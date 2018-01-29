@@ -4,9 +4,9 @@
 
 	<div class="pet-order-body pet-body">
 		<div class="pet-order-image-div col-5 offset-1">
-			<div class='div-inline-block' ng-click='oPlacedCtrl.changeImage("prev")'><i class="left-arrow arrows fa fa-angle-left" aria-hidden="true"></i></div>
+			<div class='div-inline-block' ng-click='oPlacedCtrl.changeImage("prev")' ng-style="oPlacedCtrl.hideArrows('prev')"><i class="left-arrow arrows fa fa-angle-left" aria-hidden="true"></i></div>
 			<img ng-src="{{oPlacedCtrl.pet.photoUrls[oPlacedCtrl.photoIndex]}}" class="pet-order-image">
-			<div class='div-inline-block' ng-click='oPlacedCtrl.changeImage("next")'><i class="right-arrow arrows fa fa-angle-right" aria-hidden="true"></i></div>	    	
+			<div class='div-inline-block' ng-click='oPlacedCtrl.changeImage("next")' ng-style="oPlacedCtrl.hideArrows('next')"><i class="right-arrow arrows fa fa-angle-right" aria-hidden="true"></i></div>	    	
 		</div>
 		<div class="pet-order-details div-inline-block col-5">
 			<p class="p-few-margin-bottom"><span class='bold'>Nome: </span> {{oPlacedCtrl.pet.name}}</p>

@@ -38,9 +38,9 @@
 		<div class="row">
 			<div class="col-3 pet-info-small" ng-repeat="pet in petsCtrl.pets">
 				<div class="pet-thumbnail-div">
-					<i class="left-arrow fa fa-angle-left" aria-hidden="true" ng-show="{{pet.photoUrls.length > 1}}"></i>
+					<span  ng-click="petsCtrl.changeImage($index, true, 'prev')" ng-style="petsCtrl.hideArrows($index, true, 'prev')"><i class="left-arrow fa fa-angle-left" aria-hidden="true"></i></span>
 			    	<img ng-src="{{pet.photoUrls[pet.photoIndex]}}" class="pet-thumbnail-small">
-			    	<span  ng-click="petsCtrl.changePetThumbnail($index)"><i class="right-arrow fa fa-angle-right" aria-hidden="true" ng-show="{{pet.photoUrls.length > 1}}"></i></span>
+			    	<span  ng-click="petsCtrl.changeImage($index, true, 'next')" ng-style="petsCtrl.hideArrows($index, true, 'next')"><i class="right-arrow fa fa-angle-right" aria-hidden="true" ></i></span>
 			    </div>
 		    	<p class="bold">{{pet.name}}</p>
 		    	<p class="pet-info-category">{{pet.category.name}}</p>
@@ -74,10 +74,12 @@
 	        </button>
 	      </div>
 	      <div class="modal-body row">
-	      	<div class="pet-modal-picture col-5">
-	      		<img ng-src="{{petsCtrl.clickedPet.photoUrls[0]}}" class="pet-modal-img">
-	      	</div>
-	      	<div class="pet-modal-body col-7">
+	      	<div class="pet-modal-picture col-6">
+	      		<span  ng-click="petsCtrl.changeImage($index, false, 'prev')" ng-style="petsCtrl.hideArrows($index, false,'prev')"><i class="left-arrow fa fa-angle-left" aria-hidden="true"></i></span>
+	      		<img ng-src="{{petsCtrl.clickedPet.photoUrls[petsCtrl.clickedPet.photoIndex]}}" class="pet-modal-img">
+	      		<span  ng-click="petsCtrl.changeImage($index, false, 'next')" ng-style="petsCtrl.hideArrows($index, false,'next')"><i class="right-arrow fa fa-angle-right" aria-hidden="true" ></i></span>
+	      	</div>			    	
+	      	<div class="pet-modal-body col-6">
 		        <p class="p-without-margin-bottom"><span class='bold'>Nome: </span> {{petsCtrl.clickedPet.name}}</p>
 		        <p class="pet-info-category"><span class='bold'>Categoria: </span> {{petsCtrl.clickedPet.category.name}}</p>
 				<p class="p-without-margin-bottom"><span class='bold'>Raça: </span> {{petsCtrl.clickedPet.tags[0].name}}</p>

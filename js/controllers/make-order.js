@@ -15,21 +15,22 @@
 
 		self.changeImage = function(direction) {
 			if(direction=='next') {
-				if(self.photoIndex < self.pet.photoUrls.length) {
+				if(self.photoIndex < self.pet.photoUrls.length) 
 					self.photoIndex++;
-				}
-				else {
-					//TODO: right arrow disabled
-				}
 			}
 			else if(direction=='prev') {
-				if(self.photoIndex > 0) {
+				if(self.photoIndex > 0)
 					self.photoIndex--;
-				} else {
-					//TODO: left arrow disabled
-				}
 			}
 		};
+
+		self.hideArrows = function(direction) {
+			if((direction == 'next' && self.photoIndex >= self.pet.photoUrls.length-1) ||
+				(direction == 'prev' && self.photoIndex == 0))
+				return {opacity:0};
+
+			return {opacity:1};
+		}
 
 		self.makeOrder = function() {
 			//order object with the correct data

@@ -15,9 +15,27 @@
 			self.pets.forEach(function(pet) { pet.photoIndex = 0 });
 		}, function() {});
 		
-		self.changePetThumbnail = function(index) {
-			self.pets[index].photoIndex++;
+		self.hideArrows = function(index, mainGrid, direction) {
+			let pet = (mainGrid) ? self.pets[index] : self.clickedPet;
+
+			if((direction == 'next' && pet.photoIndex>= pet.photoUrls.length-1) ||
+				(direction == 'prev' && pet.photoIndex == 0))
+				return {opacity:0};
+
+			return {opacity:1};
 		}
+
+		self.changeImage = function(index, mainGrid, direction) {
+			let pet = (mainGrid) ? self.pets[index] : self.clickedPet;
+
+			if(direction=='next') {
+				if(pet.photoIndex < pet.photoUrls.length)
+					pet.photoIndex++;
+			} else if(direction=='prev') {
+				if(pet.photoIndex > 0)
+					pet.photoIndex--;
+			}
+		};
 
 		self.openPetDetailsModal = function(index) {
 			self.clickedPet = self.pets[index];
