@@ -1,4 +1,5 @@
 <div ng-controller='PetsController as petsCtrl' class="main-div">
+	
 	<div class="search-bar">
 		<div class="input-group">
 			<div class="input-group-prepend">
@@ -6,15 +7,13 @@
 		    		<i class="fa fa-search"></i>
 		    	</span>
 		  	</div>
-		  	<input type="text" class="form-control search-field" placeholder="Buscar..." aria-label="Buscar">
+		  	<input type="text" class="form-control search-field" placeholder="Buscar..." aria-label="Buscar" ng-model="search">
 			<div class="dropdown">
 			  <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			    Categoria
 			  </button>
-			  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-			    <a class="dropdown-item" href="#">Cachorro</a>
-			    <a class="dropdown-item" href="#">Gato</a>
-			    <a class="dropdown-item" href="#">Hamster</a>
+			  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
+			    <span class="dropdown-item link" ng-repeat="category in petsCtrl.categories" ng-click="petsCtrl.chooseCategory(category)">{{category}}</span>
 			  </div>
 			</div>
 			<div class="dropdown">
@@ -22,13 +21,20 @@
 			    Filtros
 			  </button>
 			  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-			    <div class="form-check">
-			      <input type="checkbox" class="form-check-input">
-			        Poodle
+			  	<h6 class="dropdown-header">Idade</h6>
+			    <div class="form-check" ng-repeat="filter in petsCtrl.filters.size">
+			      <input type="checkbox" class="form-check-input" ng-click="petsCtrl.chooseFilter(filter)">
+			        {{filter}}
 			    </div>
-			    <div class="form-check">
-			      <input type="checkbox" class="form-check-input">
-			        Poodle
+			  	<h6 class="dropdown-header">Gênero</h6>
+			    <div class="form-check" ng-repeat="filter in petsCtrl.filters.gender">
+			      <input type="checkbox" class="form-check-input" ng-click="petsCtrl.chooseFilter(filter)">
+			      {{filter}}
+			    </div>
+			  	<h6 class="dropdown-header">Raça</h6>
+			    <div class="form-check" ng-repeat="filter in petsCtrl.filters.bread">
+			      <input type="checkbox" class="form-check-input" ng-click="petsCtrl.chooseFilter(filter)">
+			      {{filter}}
 			    </div>
 			  </div>
 			</div>
@@ -36,7 +42,7 @@
 	</div>
 	<div class="store-inventory">
 		<div class="row">
-			<div class="col-3 pet-info-small" ng-repeat="pet in petsCtrl.pets">
+			<div class="col-3 pet-info-small" ng-repeat="pet in petsCtrl.pets | filter:search | filter: petsCtrl.category |selectFilters:petsCtrl.selectedFilters">
 				<div class="pet-thumbnail-div">
 					<span  ng-click="petsCtrl.changeImage($index, true, 'prev')" ng-style="petsCtrl.hideArrows($index, true, 'prev')"><i class="left-arrow fa fa-angle-left" aria-hidden="true"></i></span>
 			    	<img ng-src="{{pet.photoUrls[pet.photoIndex]}}" class="pet-thumbnail-small">

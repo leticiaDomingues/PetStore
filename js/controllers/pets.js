@@ -14,7 +14,18 @@
 		self.pets.$promise.then(function() {
 			self.pets.forEach(function(pet) { pet.photoIndex = 0 });
 		}, function() {});
-		
+
+
+		self.categories = ['Cachorro', 'Gato', 'Hamister'];
+		self.category = "";
+
+		self.filters = {};
+		self.filters.bread = ['Ragdoll', 'Persa', 'Labrador', 'Poodle com Cocker', 'Cocker', 'Poodle Toy' , 'Golden Retriever', 'Rex', 'Sírio'];
+		self.filters.size = ['Filhote', 'Adulto'];
+		self.filters.gender = ['Fêmea', 'Macho'];
+		self.selectedFilters = [];
+
+		/*
 		self.hideArrows = function(index, mainGrid, direction) {
 			let pet = (mainGrid) ? self.pets[index] : self.clickedPet;
 
@@ -35,7 +46,21 @@
 				if(pet.photoIndex > 0)
 					pet.photoIndex--;
 			}
-		};
+		};*/
+
+
+		self.chooseCategory = function(category) {
+			self.category = category;
+		}
+
+		self.chooseFilter = function(filter) {
+			let index = self.selectedFilters.indexOf(filter);
+
+			if(index > -1)
+				self.selectedFilters.splice(index, 1);
+			else
+				self.selectedFilters.push(filter);
+		}
 
 		self.openPetDetailsModal = function(index) {
 			self.clickedPet = self.pets[index];

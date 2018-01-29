@@ -41,6 +41,11 @@
 
 .form-check {
 	padding: 0.4rem 0rem 0.4rem 2rem;
+	font-size: .8rem;
+}
+
+.form-check-input {
+	cursor: pointer;
 }
 
 .pet-info-small {
