@@ -15,8 +15,6 @@
 			self.pets.forEach(function(pet) { pet.photoIndex = 0 });
 		}, function() {});
 		
-		console.log(self.pets);
-
 		self.changePetThumbnail = function(index) {
 			self.pets[index].photoIndex++;
 		}

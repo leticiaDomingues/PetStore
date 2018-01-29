@@ -38,3 +38,12 @@
 .ng-invalid.ng-dirty.input-password {
 	border: 0.5px solid rgba(255, 0, 0, .3);
 }
+
+.link {
+	color: rgba(0,0,0,.9);
+    cursor: pointer;
+}
+
+.incorrect-credentials {
+	color:red;
+}

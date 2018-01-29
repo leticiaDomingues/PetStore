@@ -26,6 +26,9 @@
 			<div class="input-login">
 			  <button type='submit' class='btn btn-secondary login-button' ng-click="loginCtrl.logar()">Login</button>
 			</div>
+			<div class="input-login incorrect-credentials" ng-style='loginCtrl.errors.incorrectCredentials'>
+			  <span>Usuário e/ou senha incorretos.</span>
+			</div>
 			<div class="input-login">
 			  <span>Não tem uma conta ainda? Cadastre-se <a href="#/">aqui</a>.</span>
 			</div>

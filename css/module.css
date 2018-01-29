@@ -9,6 +9,19 @@
 	margin-top: 1rem;
 }
 
+.navbar-collapse {
+	flex-basis: 0;
+	display: inline-block;
+}
+
+.navbar-nav {
+	flex-direction: row;
+}
+
+.nav-item {
+	margin: 0 .8rem 0 .8rem;
+}
+
 .search-bar {
 	width:100%;
 	padding: 0;
