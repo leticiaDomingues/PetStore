@@ -1,0 +1,34 @@
+<div ng-controller='LoginController as loginCtrl' class="login-div pet-title">
+	<div class='logo-div'>
+		<img src='images/paw.png' class='logo-image'>
+		<div class="pet-span">PetStore</div>
+	</div>
+	<div class="login-div-body">
+		<form novalidate>
+			<div class="input-group input-login">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text">
+			    	<i class="fas fa-user"></i>
+			    </span>
+			  </div>
+			  <input type="text" class="form-control input-username" ng-style="loginCtrl.errors.borderUsernameError" placeholder="Username" aria-label="Username" ng-model="loginCtrl.user.username" required>
+			</div>
+			<p class='field-error' ng-style='loginCtrl.errors.displayUsernameError'>Campo obrigatório.</p>
+			<div class="input-group input-login">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text">
+			    	<i class="fa fa-lock"></i>
+			    </span>
+			  </div>
+			  <input type="password" class="form-control input-password" ng-style="loginCtrl.errors.borderPasswordError" placeholder="Senha" aria-label="Senha" ng-model="loginCtrl.user.password" required>
+			</div>
+			<p class='field-error field-error-password' ng-style='loginCtrl.errors.displayPasswordError'>Campo obrigatório.</p>
+			<div class="input-login">
+			  <button type='submit' class='btn btn-secondary login-button' ng-click="loginCtrl.logar()">Login</button>
+			</div>
+			<div class="input-login">
+			  <span>Não tem uma conta ainda? Cadastre-se <a href="#/">aqui</a>.</span>
+			</div>
+		</form>
+	</div>
+</div>

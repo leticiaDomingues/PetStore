@@ -16,6 +16,9 @@
 			})
 			.when('/orderPlaced/:id', {
 				templateUrl : 'view/order-placed.html'
+			})
+			.when('/login/', {
+				templateUrl : 'view/login.html'
 			});	
 	}
 })();

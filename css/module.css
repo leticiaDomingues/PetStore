@@ -118,3 +118,57 @@
 .arrows {
 	height: 10rem;
 }
+
+.logo-image {
+	width: 8rem;
+	height: 8rem;
+	margin-left: auto;
+}
+
+.logo-div {
+	display:flex;
+}
+.pet-span {
+	font-size: 2.8rem;
+	height: 8rem;
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+    padding-right: 1rem;
+}
+
+.login-div-body {
+    margin-top: 1rem;
+}
+
+.login-div {
+	width:30%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 5rem;
+	-webkit-box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.2);
+	-moz-box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.2);
+	box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.2);
+	padding-bottom: 1rem;
+}
+
+.input-login {
+    width: 21rem;
+    margin: auto;
+    margin-top: 1.1rem;
+}
+
+.login-button {
+	width:100%;
+	margin-top: .3rem;
+	height: 3rem;
+}
+
+.field-error {
+	color: red;
+	font-size: .8rem;
+	width: 21rem;
+	text-align: left;
+	margin: auto;
+	padding-left: .5rem;
+}
