@@ -22,7 +22,7 @@
 		//get pets from API
 		self.pets = PetsService.query({pet: 'pet', findByStatus: 'findByStatus', status: 'disponivel'});
 		self.pets.$promise.then(function() {
-			self.pets.forEach(function(pet) { pet.photoIndex = 0 });
+			self.pets.forEach(function(pet) { pet.photoIndex = 0; pet.numberOfPhotos = pet.photoUrls.length });
 
 		    self.paginatePets();
 		    self.numberOfPages = Math.ceil(self.pets.length / self.numPerPage);
@@ -48,8 +48,8 @@
 			let aux = ($scope.currentPage-1) * self.numPerPage;
 			let pet = (mainGrid) ? self.pets[index+aux] : self.clickedPet;
 
-			if((direction == 'next' && pet.photoIndex>= pet.photoUrls.length-1) ||
-				(direction == 'prev' && pet.photoIndex == 0))
+			if((direction == 'next' && pet!=undefined && pet.photoIndex>= pet.numberOfPhotos-1) ||
+				(direction == 'prev' && pet!=undefined && pet.photoIndex == 0))
 				return {opacity:0};
 
 			return {opacity:1};
@@ -59,7 +59,7 @@
 			let pet = (mainGrid) ? self.pets[index+aux] : self.clickedPet;
 
 			if(direction=='next') {
-				if(pet.photoIndex < pet.photoUrls.length)
+				if(pet.photoIndex < pet.numberOfPhotos)
 					pet.photoIndex++;
 			} else if(direction=='prev') {
 				if(pet.photoIndex > 0)

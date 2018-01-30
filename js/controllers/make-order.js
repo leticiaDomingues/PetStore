@@ -11,11 +11,15 @@
 		var self = this;
 
 		self.pet = PetsService.get({pet: 'pet', id:$routeParams.id});
+		self.pet.$promise.then(function() {
+			self.pet.numberOfPhotos = self.pet.photoUrls.length;
+		}, function() {});
+
 		self.photoIndex=0;
 
 		self.changeImage = function(direction) {
 			if(direction=='next') {
-				if(self.photoIndex < self.pet.photoUrls.length) 
+				if(self.photoIndex <self.pet.numberOfPhotos) 
 					self.photoIndex++;
 			}
 			else if(direction=='prev') {
@@ -25,7 +29,7 @@
 		};
 
 		self.hideArrows = function(direction) {
-			if((direction == 'next' && self.photoIndex >= self.pet.photoUrls.length-1) ||
+			if((direction == 'next' && self.photoIndex >= self.pet.numberOfPhotos-1) ||
 				(direction == 'prev' && self.photoIndex == 0))
 				return {opacity:0};
 
