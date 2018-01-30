@@ -22,10 +22,19 @@
 	        });
 		};
 
-		function makePetOrder(order) {
-		    return $http.post(baseUrl + '/store/order', order).then(function(result){
-		        console.log(result);
-		    });
+		function getOrder(orderId) {
+			return $http.get(baseUrl + '/store/order/' + orderId).then(function(result){
+			  	return result.data;
+	        });
+		}
+
+		function makePetOrder(order, pet) {
+			//updatePetStatus(pet);
+		    return $http.post(baseUrl + '/store/order', order);
+		}
+
+		function updatePetStatus(pet) {
+			$http.post(baseUrl + '/pet', pet);
 		}
 
 		function login(user) {
@@ -59,7 +68,8 @@
 		return {
 			login : login,
 			makePetOrder : makePetOrder,
-			getPet : getPet
+			getPet : getPet,
+			getOrder : getOrder
 		};
 	}
 })();

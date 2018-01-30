@@ -5,9 +5,9 @@
 		.module('app')
 		.controller('MakeOrderController', makeOrderController);
 
-	makeOrderController.$inject = ['PetsService', 'PetsHttp', '$routeParams', '$location'];
+	makeOrderController.$inject = ['PetsHttp', '$routeParams', '$location', '$localStorage'];
 
-	function makeOrderController(PetsService, PetsHttp, $routeParams, $location) {
+	function makeOrderController(PetsHttp, $routeParams, $location, $localStorage) {
 		var self = this;
 
 		self.photoIndex=0;
@@ -42,16 +42,18 @@
 				complete : false
 			};
 
-			let promise = PetsHttp.makePetOrder(order);
+			let user = $localStorage.user;
+			if(user) {
+				self.pet.status = 'vendido';
+				let promise = PetsHttp.makePetOrder(order, self.pet);
 
-			//success - order placed
-			promise.then(function(success) {
-				$location.path('/orderPlaced/' + order.id);
-		    }, 
-		    //error - order not placed
-		    function(data){
-	            console.log(data);
-	        }); 
+				//success - order placed
+				promise.then(function(success) {
+					$location.path('/orderPlaced/' + order.id);
+			    }, function(data){}); 
+			} else {
+				$location.path('/login/makeOrder' + self.pet.id);
+			}
 		};
 
 		//control thumbnail arrows

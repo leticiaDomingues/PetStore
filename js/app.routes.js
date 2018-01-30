@@ -17,7 +17,7 @@
 			.when('/orderPlaced/:id', {
 				templateUrl : 'view/order-placed.html'
 			})
-			.when('/login/', {
+			.when('/login/:previousPage', {
 				templateUrl : 'view/login.html'
 			});	
 	}

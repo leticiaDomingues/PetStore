@@ -5,20 +5,25 @@
 		.module('app')
 		.controller('OrderPlacedController', orderPlacedController);
 
-	orderPlacedController.$inject = ['PetsService', '$routeParams', '$location'];
+	orderPlacedController.$inject = ['PetsHttp', '$routeParams', '$location'];
 
-	function orderPlacedController(PetsService, $routeParams, $location) {
+	function orderPlacedController(PetsHttp, $routeParams, $location) {
 		var self = this;
-
-		//get - order and pet info
-		self.order = PetsService.get({store: 'store', order: 'order', id:$routeParams.id});
-		self.order.$promise.then(function() {
-			self.pet = PetsService.get({pet: 'pet', id:self.order.petId});
-			self.order.shipDate = self.formatDate(self.order.shipDate);
-			console.log(self.order);
-		}, function() {});
 		self.photoIndex=0;
 
+		//get - order and pet info
+		let promise = PetsHttp.getOrder($routeParams.id);
+		promise.then(function(data) {
+			self.order = data;
+			self.order.shipDate = self.formatDate(self.order.shipDate);
+
+			let promise = PetsHttp.getPet(self.order.petId);
+			promise.then(function(data) {
+				self.pet = data;
+		    }, function(){}); 
+	    }, function(){}); 
+
+		//control thumbnail arrows
 		self.changeImage = function(direction) {
 			if(direction=='next') {
 				if(self.photoIndex < self.pet.photoUrls.length) 
@@ -29,16 +34,15 @@
 					self.photoIndex--;
 			}
 		};
-
-
 		self.hideArrows = function(direction) {
-			if((direction == 'next' && self.photoIndex >= self.pet.photoUrls.length-1) ||
-				(direction == 'prev' && self.photoIndex == 0))
+			if((direction == 'next' && self.pet != undefined && self.photoIndex >= self.pet.photoUrls.length-1) ||
+				(direction == 'prev' && self.pet != undefined && self.photoIndex == 0))
 				return {opacity:0};
 
 			return {opacity:1};
 		}
 
+		//deixa a data no formato dd/MM/yyyy
 		self.formatDate = function(date) {
 			return date.substring(8, 10) + '/' +
 				date.substring(5, 7) + '/' +

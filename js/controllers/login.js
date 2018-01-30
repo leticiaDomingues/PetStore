@@ -5,12 +5,13 @@
 		.module('app')
 		.controller('LoginController', loginController);
 
-	loginController.$inject = ['$scope','PetsHttp',  '$location', 'ValidatorService', '$localStorage'];
+	loginController.$inject = ['$scope','PetsHttp',  '$location', 'ValidatorService', '$localStorage' ,'$routeParams'];
 
-	function loginController($scope, PetsHttp, $location, ValidatorService, $localStorage, $sessionStorage) {
+	function loginController($scope, PetsHttp, $location, ValidatorService, $localStorage, $routeParams) {
 		var self = this;
 		self.errors = ValidatorService.errors;
 		self.errors.incorrectCredentials = { display: 'none'};
+		self.previousPage = $routeParams.previousPage;
 
 		self.user = {
 			username : "",
@@ -31,7 +32,11 @@
 						$localStorage.user = success;
 						//atualiza a view
 						$scope.$parent.$parent.currentUser = $localStorage.user;
-						$location.path('/');
+
+						if(self.previousPage=='home')
+							$location.path('/');
+						else if(self.previousPage.indexOf('makeOrder') > -1)
+							$location.path('/makeOrder/' + self.previousPage.substring(9));
 					} else {
 						self.errors.incorrectCredentials = { display: 'block'};
 					}
