@@ -42,7 +42,7 @@
 	</div>
 	<div class="store-inventory">
 		<div class="row">
-			<div class="col-3 pet-info-small" ng-repeat="pet in petsCtrl.pets | filter:search | filter: petsCtrl.category |selectFilters:petsCtrl.selectedFilters">
+			<div class="col-3 pet-info-small" ng-repeat="pet in petsCtrl.paginatedPets | filter:search | filter: petsCtrl.category |selectFilters:petsCtrl.selectedFilters">
 				<div class="pet-thumbnail-div">
 					<span  ng-click="petsCtrl.changeImage($index, true, 'prev')" ng-style="petsCtrl.hideArrows($index, true, 'prev')"><i class="left-arrow fa fa-angle-left" aria-hidden="true"></i></span>
 			    	<img ng-src="{{pet.photoUrls[pet.photoIndex]}}" class="pet-thumbnail-small">
@@ -53,18 +53,18 @@
 		    	<button class="btn btn-outline-secondary pet-info-button" ng-click="petsCtrl.openPetDetailsModal($index)">Ver detalhes</button>
 		    </div>		    
 		 </div>
-		 
 	</div>
+
+	
+	<!-- Pagination -->
 	<nav aria-label="Page navigation example">
-	  <ul class="pagination justify-content-center">
-	    <li class="page-item disabled">
-	      <a class="page-link" href="#" tabindex="-1">Anterior</a>
+	  <ul class="pagination justify-content-center" ng-model="currentPage">
+	    <li class="page-item" ng-class="petsCtrl.paginationClasses[0]">
+	      <span class="page-link" ng-click="petsCtrl.changePage(-1)" tabindex="-1">Anterior</span>
 	    </li>
-	    <li class="page-item"><a class="page-link" href="#">1</a></li>
-	    <li class="page-item"><a class="page-link" href="#">2</a></li>
-	    <li class="page-item"><a class="page-link" href="#">3</a></li>
-	    <li class="page-item">
-	      <a class="page-link" href="#">Próximo</a>
+	    <li class="page-item" ng-repeat="i in petsCtrl.pages track by $index" ng-click="petsCtrl.changePage($index+1)" ng-class="petsCtrl.pages[$index]"><span class="page-link">{{$index+1}}</span></li>
+	    <li class="page-item" ng-class="petsCtrl.paginationClasses[1]">
+	      <span class="page-link" ng-click="petsCtrl.changePage(0)">Próximo</span>
 	    </li>
 	  </ul>
 	</nav>

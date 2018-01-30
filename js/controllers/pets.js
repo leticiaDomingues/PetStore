@@ -5,15 +5,30 @@
 		.module('app')
 		.controller('PetsController', petsController);
 
-	petsController.$inject = ['PetsService'];
+	petsController.$inject = ['$scope','PetsService', 'PetsHttp'];
 
-	function petsController(PetsService) {
+	function petsController($scope, PetsService) {
 		var self = this;
+
+		//pagination var
+		$scope.currentPage = 1;
+		self.paginatedPets = [];
+  		self.numPerPage = 8
+  		self.paginationClasses=['disabled',''];
+  		self.pages = [];
+  		self.numberOfPages;
+
 
 		//get pets from API
 		self.pets = PetsService.query({pet: 'pet', findByStatus: 'findByStatus', status: 'disponivel'});
 		self.pets.$promise.then(function() {
 			self.pets.forEach(function(pet) { pet.photoIndex = 0 });
+
+		    self.paginatePets();
+		    self.numberOfPages = Math.ceil(self.pets.length / self.numPerPage);
+
+		    for(let i=0; i<self.numberOfPages; i++)
+		    	self.pages[i] = (i==0) ? 'active' : '';
 		}, function() {});
 
 		//initialize categories 
@@ -28,10 +43,10 @@
 		self.filters.gender = ['Fêmea', 'Macho'];
 		self.selectedFilters = [];
 
-		
 		//control thumbnail arrows
 		self.hideArrows = function(index, mainGrid, direction) {
-			let pet = (mainGrid) ? self.pets[index] : self.clickedPet;
+			let aux = ($scope.currentPage-1) * self.numPerPage;
+			let pet = (mainGrid) ? self.pets[index+aux] : self.clickedPet;
 
 			if((direction == 'next' && pet.photoIndex>= pet.photoUrls.length-1) ||
 				(direction == 'prev' && pet.photoIndex == 0))
@@ -40,7 +55,8 @@
 			return {opacity:1};
 		}
 		self.changeImage = function(index, mainGrid, direction) {
-			let pet = (mainGrid) ? self.pets[index] : self.clickedPet;
+			let aux = ($scope.currentPage-1) * self.numPerPage;
+			let pet = (mainGrid) ? self.pets[index+aux] : self.clickedPet;
 
 			if(direction=='next') {
 				if(pet.photoIndex < pet.photoUrls.length)
@@ -50,7 +66,6 @@
 					pet.photoIndex--;
 			}
 		};
-
 
 		//control categories and filters
 		self.chooseCategory = function($event, index) {
@@ -71,11 +86,38 @@
 
 		//control modal
 		self.openPetDetailsModal = function(index) {
-			self.clickedPet = self.pets[index];
+			let aux = ($scope.currentPage-1) * self.numPerPage;
+			self.clickedPet = self.pets[index+aux];
 			$('#petDetailsModal').modal('toggle');
 		}
 		self.closePetDetailsModal = function() {
 			$('#petDetailsModal').modal('hide')
+		}
+
+		//control pagination
+		$scope.$watch("currentPage", function() {
+		     self.paginatePets();
+ 		});
+ 		self.paginatePets = function() {
+ 			let begin = (($scope.currentPage - 1) * self.numPerPage);
+		   	let end = begin + self.numPerPage;
+
+		    self.paginatedPets = self.pets.slice(begin, end);
+ 		}
+		self.changePage = function(index) {
+			switch(index) {
+				case -1: $scope.currentPage--;
+						 break;
+				case 0:  $scope.currentPage++;
+						 break;
+				default: $scope.currentPage = index;
+			}
+
+			if($scope.currentPage == self.pages.length) self.paginationClasses=['','disabled'];
+			if($scope.currentPage == 1) self.paginationClasses=['disabled',''];
+			for(let i=0; i<self.numberOfPages; i++) {
+		    	self.pages[i] = (i==$scope.currentPage-1) ? 'active' : '';
+			}
 		}
 	}
 })();

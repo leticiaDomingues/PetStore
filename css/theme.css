@@ -47,3 +47,15 @@
 .incorrect-credentials {
 	color:red;
 }
+
+.page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: #abacad;
+    border-color: #ced4da;
+}
+
+.page-item:last-child .page-link, 
+.page-item:first-child .page-link {
+	border-radius: 0;
+}

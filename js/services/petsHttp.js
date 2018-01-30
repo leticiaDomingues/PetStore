@@ -10,6 +10,12 @@
 	function petsHttp($http) {
 		let baseUrl = 'http://petstore.swagger.io/v2';	
 
+		function getAvailablePets() {
+	        return $http.get(baseUrl + '/pet/findByStatus?status=disponivel').then(function(result){
+			  	return result.data;
+	        });
+		};
+
 		function login(user) {
 	        return $http.get(baseUrl + '/user/' + user.username).then(function(result){
 	        	if(result.data.password == user.password) {
