@@ -16,6 +16,18 @@
 	        });
 		};
 
+		function getPet(petId) {
+	        return $http.get(baseUrl + '/pet/' + petId).then(function(result){
+			  	return result.data;
+	        });
+		};
+
+		function makePetOrder(order) {
+		    return $http.post(baseUrl + '/store/order', order).then(function(result){
+		        console.log(result);
+		    });
+		}
+
 		function login(user) {
 	        return $http.get(baseUrl + '/user/' + user.username).then(function(result){
 	        	if(result.data.password == user.password) {
@@ -46,7 +58,8 @@
 
 		return {
 			login : login,
-			originalLogin : originalLogin
+			makePetOrder : makePetOrder,
+			getPet : getPet
 		};
 	}
 })();

@@ -12,7 +12,20 @@
 			<p class="p-few-margin-bottom pet-info-category"><span class='bold'>Raça: </span> {{mOrderCtrl.pet.tags[0].name}}</p>
 			<p class="p-few-margin-bottom"><span class='bold'>Idade: </span> {{mOrderCtrl.pet.tags[1].name}}</p>
 			<p><span class='bold'>Sexo: </span> {{mOrderCtrl.pet.tags[2].name}}</p>
-			<p><span class='bold'>Data de entrega: </span>{{mOrderCtrl.shipDate}}</p>
+			<p class='p-few-margin-bottom'><span class='bold'>Data de entrega: </span>{{mOrderCtrl.shipDate | date:'dd/MM/yyyy'}}</p>
+			<p class='inline-block'><span class='bold'>Entrega: </span>
+				<div class="dropdown">
+					<button class="btn btn-outline-secondary dropdown-toggle dropup" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					{{mOrderCtrl.selectedDays}}
+					</button>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						<span class="dropdown-item link" ng-click="mOrderCtrl.changeShipDate(3)">Em 3 dias</span>
+						<span class="dropdown-item link" ng-click="mOrderCtrl.changeShipDate(4)">Em 4 dias</span>
+						<span class="dropdown-item link" ng-click="mOrderCtrl.changeShipDate(5)">Em 5 dias</span>
+					</div>
+				</div>
+
+			</p>
 			<div class="pet-order-buy-button ">
 				<button class="btn btn-secondary btn-lg" ng-click="mOrderCtrl.makeOrder()">Comprar</button>
 			</div>

@@ -191,3 +191,7 @@
 	margin: auto;
 	padding-left: .5rem;
 }
+
+.inline-block {
+	display: inline-block;
+}
