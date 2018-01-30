@@ -1,5 +1,4 @@
 <div ng-controller='PetsController as petsCtrl' class="main-div">
-	
 	<div class="search-bar">
 		<div class="input-group">
 			<div class="input-group-prepend">
@@ -13,7 +12,8 @@
 			    Categoria
 			  </button>
 			  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
-			    <span class="dropdown-item link" ng-repeat="category in petsCtrl.categories" ng-click="petsCtrl.chooseCategory(category)">{{category}}</span>
+			  	<span class="dropdown-item link" ng-click="petsCtrl.chooseCategory($event, -1)" ng-class="petsCtrl.categoriesClass[0]">- Todas -</span>
+			    <span class="dropdown-item link" ng-repeat="category in petsCtrl.categories" ng-click="petsCtrl.chooseCategory($event, $index)" ng-class="petsCtrl.categoriesClass[$index+1]">{{category}}</span>
 			  </div>
 			</div>
 			<div class="dropdown">

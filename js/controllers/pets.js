@@ -10,22 +10,26 @@
 	function petsController(PetsService) {
 		var self = this;
 
+		//get pets from API
 		self.pets = PetsService.query({pet: 'pet', findByStatus: 'findByStatus', status: 'disponivel'});
 		self.pets.$promise.then(function() {
 			self.pets.forEach(function(pet) { pet.photoIndex = 0 });
 		}, function() {});
 
-
+		//initialize categories 
 		self.categories = ['Cachorro', 'Gato', 'Hamister'];
 		self.category = "";
+		self.categoriesClass = ['bold', '', '', ''];
 
+		//initialize filters 
 		self.filters = {};
 		self.filters.bread = ['Ragdoll', 'Persa', 'Labrador', 'Poodle com Cocker', 'Cocker', 'Poodle Toy' , 'Golden Retriever', 'Rex', 'Sírio'];
 		self.filters.size = ['Filhote', 'Adulto'];
 		self.filters.gender = ['Fêmea', 'Macho'];
 		self.selectedFilters = [];
 
-		/*
+		
+		//control thumbnail arrows
 		self.hideArrows = function(index, mainGrid, direction) {
 			let pet = (mainGrid) ? self.pets[index] : self.clickedPet;
 
@@ -35,7 +39,6 @@
 
 			return {opacity:1};
 		}
-
 		self.changeImage = function(index, mainGrid, direction) {
 			let pet = (mainGrid) ? self.pets[index] : self.clickedPet;
 
@@ -46,13 +49,17 @@
 				if(pet.photoIndex > 0)
 					pet.photoIndex--;
 			}
-		};*/
+		};
 
 
-		self.chooseCategory = function(category) {
-			self.category = category;
+		//control categories and filters
+		self.chooseCategory = function($event, index) {
+			self.category = (index > -1) ? self.categories[index] : "";
+
+			self.categoriesClass = ['','','',''];
+			self.categoriesClass[index+1] = 'bold';
+
 		}
-
 		self.chooseFilter = function(filter) {
 			let index = self.selectedFilters.indexOf(filter);
 
@@ -62,12 +69,11 @@
 				self.selectedFilters.push(filter);
 		}
 
+		//control modal
 		self.openPetDetailsModal = function(index) {
 			self.clickedPet = self.pets[index];
-			console.log(self.clickedPet);
 			$('#petDetailsModal').modal('toggle');
 		}
-
 		self.closePetDetailsModal = function() {
 			$('#petDetailsModal').modal('hide')
 		}

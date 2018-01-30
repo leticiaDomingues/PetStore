@@ -8,14 +8,12 @@
 
 	function selectFilters($filter) {
 		return function(list, arrayFilter){
-			console.log(arrayFilter.length);
 		    if(arrayFilter.length > 0){
 		        return $filter("filter")(list, function(listItem){
 		          for (var i = 0; i < arrayFilter.length; i++) {
 		          	for(var j=0; j<3; j++) {
-		              if (arrayFilter[i].toLowerCase() == listItem.tags[j].name.toLowerCase()) {
+		              if (arrayFilter[i].toLowerCase() == listItem.tags[j].name.toLowerCase()) 
 		                return true;
-		              }
 		          	}
 		          }	
 		          return false;
