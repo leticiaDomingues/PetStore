@@ -19,6 +19,9 @@
 			})
 			.when('/login/:previousPage', {
 				templateUrl : 'view/login.html'
-			});	
+			})
+			.when('/searchOrder', {
+				templateUrl : 'view/search-order.html'
+			});
 	}
 })();
