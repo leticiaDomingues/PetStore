@@ -183,7 +183,9 @@
 	height: 3rem;
 }
 
-.field-error {
+.field-error,
+.field-error-email,
+.field-error-login {
 	color: red;
 	font-size: .8rem;
 	width: 21rem;

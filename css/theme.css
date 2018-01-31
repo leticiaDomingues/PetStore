@@ -34,9 +34,33 @@
 	letter-spacing: 1px;
 }
 
-.ng-invalid.ng-dirty.input-username,
-.ng-invalid.ng-dirty.input-password {
-	border: 0.5px solid rgba(255, 0, 0, .3);
+.ng-invalid-required.ng-dirty:not(form),
+.ng-invalid-email.ng-dirty:not(form) {
+	border: 0.5px solid rgba(255, 0, 0, .3) !important;
+}
+
+.ng-valid ~ .field-error,
+.ng-invalid ~ .field-error {
+	opacity : 0;
+}
+
+.ng-invalid.ng-dirty ~ .field-error {
+	opacity : 1;
+}
+
+.ng-invalid-required.ng-dirty.input-email ~ .field-error,
+.ng-invalid-email.ng-dirty ~ .field-error-email,
+.ng-invalid.ng-dirty + .field-error-login {
+	display: block;
+}
+
+
+.ng-invalid.input-email ~ .field-error,
+.ng-valid-email ~ .field-error-email,
+.ng-invalid-email ~ .field-error-email,
+.ng-valid ~ .field-error-login,
+.ng-invalid ~ .field-error-login {
+	display:none;
 }
 
 .link {
@@ -99,4 +123,8 @@
 
 .center {
 	text-align: center;
+}
+
+.width-30 {
+    width: 30rem;
 }

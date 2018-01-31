@@ -5,18 +5,22 @@
 	<div class="input-login center">
 	  <span>Já tem uma conta? Faça o login <a href="#/login/home">aqui</a>.</span>
 	</div>
-	<form class='signup-form margin-top-3' novalidate>
+	<form class='signup-form margin-top-3' name='signupForm' novalidate ng-submit="signupForm.$valid && signupCtrl.signup()">
 		<div class="form-group">
 	  		<div class='col-5 inline-block no-padding little-padding'>
-			    <input type="text" class="form-control"  placeholder="Nome" ng-model="signupCtrl.user.firstName" required>
+			    <input type="text" class="form-control"  placeholder="Nome" ng-model="signupCtrl.user.firstName" required maxlength='{{signupCtrl.maxLength[0]}}' ng-class="signupCtrl.ngDirtyWhenSubmitted">
+			    <span class='field-error no-padding'>Campo obrigatório.</span>
 			</div>
 			<div class='col-6 inline-block no-padding little-padding'>
-			    <input type="text" class="form-control"  placeholder="Sobrenome" ng-model="signupCtrl.user.lastName" required>
+			    <input type="text" class="form-control"  placeholder="Sobrenome" ng-model="signupCtrl.user.lastName" required maxlength='{{signupCtrl.maxLength[1]}}' ng-class="signupCtrl.ngDirtyWhenSubmitted">
+			    <span class='field-error no-padding'>Campo obrigatório.</span>
 			</div>
   		</div>
   		<div class="form-group">
-		    <input type="email" class="form-control col-11 inline-block" aria-describedby="emailHelp" placeholder="Email" ng-model="signupCtrl.user.email" required>
+		    <input type="email" class="form-control col-11 inline-block input-email" aria-describedby="emailHelp" placeholder="Email" ng-model="signupCtrl.user.email" required maxlength='{{signupCtrl.maxLength[2]}}' ng-class="signupCtrl.ngDirtyWhenSubmitted">
 		    <small class="form-text text-muted">Seu email permanecerá confidencial dentro da aplicação.</small>
+		    <span class='field-error no-padding center'>Campo obrigatório.</span>
+		    <p class='field-error-email no-padding center'>Informe um email válido. Ex: email@gmail.com</p>
   		</div>
   		<div class="form-group">
   			<div class='form-row center-flex '>
@@ -24,25 +28,32 @@
 				    <div class="input-group-prepend">
 					    <span class="input-group-text"><i class="fas fa-user"></i></span>
 					</div>
-					<input type="text" class="form-control input-username" placeholder="Username" aria-label="Username" ng-model="signupCtrl.user.username" required>
+					<input type="text" class="form-control input-username" placeholder="Username" aria-label="Username" ng-model="signupCtrl.user.username" required maxlength='{{signupCtrl.maxLength[3]}}' ng-class="signupCtrl.ngDirtyWhenSubmitted">
+					<span class='field-error center no-padding'>Campo obrigatório.</span>
 				</div>
 				<div class='col-6 no-padding input-group '>
 				    <div class="input-group-prepend">
 					    <span class="input-group-text"><i class="fa fa-lock"></i></span>
 					</div>
-					<input type="password" class="form-control input-password" placeholder="Senha" aria-label="Senha" ng-model="signupCtrl.user.password" required>
+					<input type="password" class="form-control input-password" placeholder="Senha" aria-label="Senha" ng-model="signupCtrl.user.password" required maxlength='{{signupCtrl.maxLength[4]}}' ng-class="signupCtrl.ngDirtyWhenSubmitted">
+					<span class='field-error center width-30 no-padding'>Campo obrigatório.</span>
 				</div>
 			</div>
   		</div>
-  		<div class='signup-error form-group margin-top-3' ng-style="signupCtrl.signupError">
+  		<div class='signup-error form-group margin-top-3' ng-style="signupCtrl.errors[0]">
 	  		<div class="col-11 signup-button-div inline-block no-padding red-font">
 				Ocorreu um erro ao processar a solicitação. Tente novamente mais tarde.
+			</div>
+		</div>
+		<div class='signup-error form-group margin-top-3' ng-style="signupCtrl.errors[1]">
+	  		<div class="col-11 signup-button-div inline-block no-padding red-font">
+				Este username já está cadastrado na base de dados. Escolha outro para continuar.
 			</div>
 		</div>
   		<div class='form-group margin-top-3'>
 	  		<div class="col-11 signup-button-div inline-block no-padding align-right">
 				<button type='button' class='btn btn-secondary signup-button' ng-click="signupCtrl.cleanFields()">Limpar Campos</button>
-				<button type='submit' class='btn btn-secondary signup-button' ng-click="signupCtrl.signup()">Cadastrar</button>
+				<button type='submit' class='btn btn-secondary signup-button' ng-click="signupCtrl.dirtyWhenSubmitted()">Cadastrar</button>
 			</div>
 		</div>
 	</form>
