@@ -11,7 +11,7 @@
 		var self = this;
 		self.errors = ValidatorService.errors;
 		self.errors.incorrectCredentials = { display: 'none'};
-		self.previousPage = $routeParams.previousPage;
+		self.previousPage = ($routeParams.previousPage) ? $routeParams.previousPage : "home";
 
 		self.user = {
 			username : "",

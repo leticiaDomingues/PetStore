@@ -20,6 +20,12 @@
 			.when('/login/:previousPage', {
 				templateUrl : 'view/login.html'
 			})
+			.when('/login', {
+				templateUrl : 'view/login.html'
+			})
+			.when('/signup', {
+				templateUrl : 'view/signup.html'
+			})
 			.when('/searchOrder', {
 				templateUrl : 'view/search-order.html'
 			});

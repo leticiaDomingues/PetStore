@@ -195,3 +195,17 @@
 .inline-block {
 	display: inline-block;
 }
+
+.signup-form .form-group {
+	text-align: center;
+}
+
+.no-padding {
+	padding: 0;
+}
+
+.signup-form {
+	width: 70%;
+	margin : auto;
+	margin-top : 2rem;
+}

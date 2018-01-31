@@ -72,3 +72,31 @@
 .order-not-found {
 	color:red;
 }
+
+.center-flex {
+	align-items: center;
+    justify-content: center;
+}
+
+.little-padding {
+	padding-right: 2px;
+    padding-left: 2px;
+}
+
+.align-right {
+	text-align: right;
+}
+
+.signup-button {
+	border-radius: 0;
+	/*text-transform: uppercase;*/
+	margin-left: .8rem;
+}
+
+.margin-top-3 {
+	margin-top: 3rem;
+}
+
+.center {
+	text-align: center;
+}

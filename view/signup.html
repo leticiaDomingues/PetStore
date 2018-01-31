@@ -1,0 +1,49 @@
+<div ng-controller='SignupController as signupCtrl' class="main-div ">
+	<div class='pet-title'>
+		<h2>Cadastro</h2>
+	</div>
+	<div class="input-login center">
+	  <span>Já tem uma conta? Faça o login <a href="#/login/home">aqui</a>.</span>
+	</div>
+	<form class='signup-form margin-top-3' novalidate>
+		<div class="form-group">
+	  		<div class='col-5 inline-block no-padding little-padding'>
+			    <input type="text" class="form-control"  placeholder="Nome" ng-model="signupCtrl.user.firstName" required>
+			</div>
+			<div class='col-6 inline-block no-padding little-padding'>
+			    <input type="text" class="form-control"  placeholder="Sobrenome" ng-model="signupCtrl.user.lastName" required>
+			</div>
+  		</div>
+  		<div class="form-group">
+		    <input type="email" class="form-control col-11 inline-block" aria-describedby="emailHelp" placeholder="Email" ng-model="signupCtrl.user.email" required>
+		    <small class="form-text text-muted">Seu email permanecerá confidencial dentro da aplicação.</small>
+  		</div>
+  		<div class="form-group">
+  			<div class='form-row center-flex '>
+		  		<div class='col-5 no-padding input-group'>
+				    <div class="input-group-prepend">
+					    <span class="input-group-text"><i class="fas fa-user"></i></span>
+					</div>
+					<input type="text" class="form-control input-username" placeholder="Username" aria-label="Username" ng-model="signupCtrl.user.username" required>
+				</div>
+				<div class='col-6 no-padding input-group '>
+				    <div class="input-group-prepend">
+					    <span class="input-group-text"><i class="fa fa-lock"></i></span>
+					</div>
+					<input type="password" class="form-control input-password" placeholder="Senha" aria-label="Senha" ng-model="signupCtrl.user.password" required>
+				</div>
+			</div>
+  		</div>
+  		<div class='signup-error form-group margin-top-3' ng-style="signupCtrl.signupError">
+	  		<div class="col-11 signup-button-div inline-block no-padding red-font">
+				Ocorreu um erro ao processar a solicitação. Tente novamente mais tarde.
+			</div>
+		</div>
+  		<div class='form-group margin-top-3'>
+	  		<div class="col-11 signup-button-div inline-block no-padding align-right">
+				<button type='button' class='btn btn-secondary signup-button' ng-click="signupCtrl.cleanFields()">Limpar Campos</button>
+				<button type='submit' class='btn btn-secondary signup-button' ng-click="signupCtrl.signup()">Cadastrar</button>
+			</div>
+		</div>
+	</form>
+</div>

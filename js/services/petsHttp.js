@@ -37,6 +37,10 @@
 			$http.post(baseUrl + '/pet', pet);
 		}
 
+		function signup(user) {
+	    	return $http.post(baseUrl + '/user', user);
+		};
+
 		function login(user) {
 	        return $http.get(baseUrl + '/user/' + user.username).then(function(result){
 	        	if(result.data.password == user.password) {
@@ -69,7 +73,8 @@
 			login : login,
 			makePetOrder : makePetOrder,
 			getPet : getPet,
-			getOrder : getOrder
+			getOrder : getOrder,
+			signup : signup
 		};
 	}
 })();
