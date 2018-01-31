@@ -29,6 +29,9 @@
 
 		    for(let i=0; i<self.numberOfPages; i++)
 		    	self.pages[i] = (i==0) ? 'active' : '';
+
+
+		    console.log(self.pets);
 		}, function() {});
 
 		//initialize categories 

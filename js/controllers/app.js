@@ -11,6 +11,8 @@
 		var self = this;
 		$scope.currentUser = $localStorage.user;
 
+		self.activeClass=['active', ''];
+
 		self.logout = function() {
 			//remove as variaveis de sessao
 			$scope.currentUser = null;
@@ -18,6 +20,10 @@
 
 			//retorna para a home page
 			$location.path('/');
+		}
+
+		self.changeActiveClass = function(index) {
+			self.activeClass=(index==0) ? ['active', ''] : ['','active'];
 		}
 	}
 })();

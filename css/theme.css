@@ -128,3 +128,7 @@
 .width-30 {
     width: 30rem;
 }
+
+.no-border-radius {
+	border-radius: 0;
+}
