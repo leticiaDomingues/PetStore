@@ -20,9 +20,18 @@
 
 
 		//get pets from API
-		self.pets = PetsService.query({pet: 'pet', findByStatus: 'findByStatus', status: 'disponivel'});
-		self.pets.$promise.then(function() {
-			self.pets.forEach(function(pet) { pet.photoIndex = 0; pet.numberOfPhotos = pet.photoUrls.length });
+		self.pets = [];
+		let petsBD = PetsService.query({pet: 'pet', findByStatus: 'findByStatus', status: 'disponivel'});
+		petsBD.$promise.then(function() {
+			petsBD.forEach(function(pet) { 
+				pet.photoIndex = 0; 
+				pet.numberOfPhotos = pet.photoUrls.length;
+
+				//fixing API bug
+				if(pet.id!=9205436248879931000)
+					self.pets.push(pet);
+			});
+
 
 		    self.paginatePets();
 		    self.numberOfPages = Math.ceil(self.pets.length / self.numPerPage);
