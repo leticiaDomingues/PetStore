@@ -4,7 +4,7 @@
 		<div class="input-group-prepend">
 	    	<span class="input-group-text"><i class="fa fa-search"></i></span>
 	  	</div>
-	  	<input type="text" class="form-control" placeholder="Número do pedido" aria-label="Username" ng-model="sOrderCtrl.orderId">
+	  	<input type="text" class="form-control" placeholder="Número do pedido" aria-label="Username" ng-model="sOrderCtrl.orderId" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
 	  	<button class="btn btn-secondary search-order-button" ng-click="sOrderCtrl.searchOrder()">Pesquisar</button>
 	</div>
 	<div class='order-not-found' ng-style="sOrderCtrl.showError">

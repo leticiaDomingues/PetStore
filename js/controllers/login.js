@@ -14,6 +14,9 @@
 		self.incorrectCredentials = { display: 'none'};
 		self.ngDirtyWhenSubmitted="";
 
+		//username, password
+		self.maxLength = [20,20];
+
 		//location variable
 		self.previousPage = ($routeParams.previousPage) ? $routeParams.previousPage : "home";
 

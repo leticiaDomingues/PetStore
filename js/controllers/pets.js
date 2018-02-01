@@ -5,9 +5,9 @@
 		.module('app')
 		.controller('PetsController', petsController);
 
-	petsController.$inject = ['$scope','PetsService'];
+	petsController.$inject = ['$scope','PetsService', '$window'];
 
-	function petsController($scope, PetsService) {
+	function petsController($scope, PetsService, $window) {
 		var self = this;
 
 		//pagination var
@@ -41,14 +41,13 @@
 
 		//initialize filters 
 		self.filters = {};
-		self.filters.bread = ['Ragdoll', 'Persa', 'Labrador', 'Poodle com Cocker', 'Cocker', 'Poodle Toy' , 'Golden Retriever', 'Rex', 'Sírio'];
+		self.filters.breed = ['Ragdoll', 'Persa', 'Labrador', 'Poodle com Cocker', 'Cocker', 'Poodle Toy' , 'Golden Retriever', 'Rex', 'Sírio'];
 		self.filters.size = ['Filhote', 'Adulto'];
 		self.filters.gender = ['Fêmea', 'Macho'];
 		self.selectedFilters = [];
 
-		$scope.$on('cleanFilters', function() {  
-	   		self.chooseCategory(-1);   
-	   		self.selectedFilters = [];  
+		$scope.$on('cleanFilters', function() {   
+	   		$window.location.reload();
 	    });
 
 		//control thumbnail arrows

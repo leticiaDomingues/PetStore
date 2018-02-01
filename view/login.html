@@ -11,7 +11,7 @@
 			    	<i class="fas fa-user"></i>
 			    </span>
 			  </div>
-			  <input type="text" class="form-control input-username" placeholder="Username" aria-label="Username" ng-model="loginCtrl.user.username" ng-class="loginCtrl.ngDirtyWhenSubmitted" required>
+			  <input type="text" class="form-control input-username" placeholder="Username" aria-label="Username" ng-model="loginCtrl.user.username" ng-class="loginCtrl.ngDirtyWhenSubmitted" maxlength="{{loginCtrl.maxLength[0]}}" required>
 			  <p class='field-error-login'>Campo obrigatório.</p>
 			</div>
 			<div class="input-group input-login">
@@ -20,7 +20,7 @@
 			    	<i class="fa fa-lock"></i>
 			    </span>
 			  </div>
-			  <input type="password" class="form-control input-password" placeholder="Senha" aria-label="Senha" ng-model="loginCtrl.user.password" ng-class="loginCtrl.ngDirtyWhenSubmitted" required>
+			  <input type="password" class="form-control input-password" placeholder="Senha" aria-label="Senha" ng-model="loginCtrl.user.password" ng-class="loginCtrl.ngDirtyWhenSubmitted" maxlength="{{loginCtrl.maxLength[1]}}" required>
 			  <p class='field-error-login'>Campo obrigatório.</p>
 			</div>
 			<div class="input-login">
