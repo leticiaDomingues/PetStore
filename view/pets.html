@@ -22,17 +22,17 @@
 			  </button>
 			  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 			  	<h6 class="dropdown-header">Idade</h6>
-			    <div class="form-check" ng-repeat="filter in petsCtrl.filters.size">
+			    <div class="form-check pet-info-category" ng-repeat="filter in petsCtrl.filters.size">
 			      <input type="checkbox" class="form-check-input" ng-click="petsCtrl.chooseFilter(filter)">
 			        {{filter}}
 			    </div>
 			  	<h6 class="dropdown-header">Gênero</h6>
-			    <div class="form-check" ng-repeat="filter in petsCtrl.filters.gender">
+			    <div class="form-check pet-info-category" ng-repeat="filter in petsCtrl.filters.gender">
 			      <input type="checkbox" class="form-check-input" ng-click="petsCtrl.chooseFilter(filter)">
 			      {{filter}}
 			    </div>
 			  	<h6 class="dropdown-header">Raça</h6>
-			    <div class="form-check" ng-repeat="filter in petsCtrl.filters.breed">
+			    <div class="form-check pet-info-category" ng-repeat="filter in petsCtrl.filters.breed">
 			      <input type="checkbox" class="form-check-input" ng-click="petsCtrl.chooseFilter(filter)">
 			      {{filter}}
 			    </div>

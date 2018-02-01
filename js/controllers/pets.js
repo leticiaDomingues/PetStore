@@ -5,9 +5,9 @@
 		.module('app')
 		.controller('PetsController', petsController);
 
-	petsController.$inject = ['$scope','PetsService', '$window'];
+	petsController.$inject = ['$scope','PetsHttp', '$window'];
 
-	function petsController($scope, PetsService, $window) {
+	function petsController($scope, PetsHttp, $window) {
 		var self = this;
 
 		//pagination var
@@ -20,19 +20,27 @@
 
 		//get pets from API
 		self.pets = [];
-		let petsBD = PetsService.query({pet: 'pet', findByStatus: 'findByStatus', status: 'disponivel'});
-		petsBD.$promise.then(function() {
-			petsBD.forEach(function(pet) { 
+
+		//get pets from API
+		let promise = PetsHttp.getAvailablePets();
+		promise.then(function(data) { 
+			data.forEach(function(pet) { 
 				pet.photoIndex = 0; 
 				pet.numberOfPhotos = pet.photoUrls.length;
 
 				//fixing API bug
-				if(pet.id!=9205436248879931000)
+				if(pet.id!=9205436248879931000) {
 					self.pets.push(pet);
 
+					if(self.filters.breed.indexOf(pet.tags[0].name.toLowerCase()) == -1)
+						self.filters.breed.push(pet.tags[0].name.toLowerCase());
+				}
+
 				self.calculatePages(true);
+
+				
 			});
-		}, function() {});
+		}, function(){}); 
 
 		//initialize categories 
 		self.categories = ['Cachorro', 'Gato', 'Hamister'];
@@ -41,7 +49,8 @@
 
 		//initialize filters 
 		self.filters = {};
-		self.filters.breed = ['Ragdoll', 'Persa', 'Labrador', 'Poodle com Cocker', 'Cocker', 'Poodle Toy' , 'Golden Retriever', 'Rex', 'Sírio'];
+		self.filters.breed = [];
+		//self.filters.breed = ['Ragdoll', 'Persa', 'Labrador', 'Poodle com Cocker', 'Cocker', 'Poodle Toy' , 'Golden Retriever', 'Rex', 'Sírio'];
 		self.filters.size = ['Filhote', 'Adulto'];
 		self.filters.gender = ['Fêmea', 'Macho'];
 		self.selectedFilters = [];

@@ -80,6 +80,7 @@
 		};
 
 		return {
+			getAvailablePets : getAvailablePets,
 			login : login,
 			makePetOrder : makePetOrder,
 			getPet : getPet,
