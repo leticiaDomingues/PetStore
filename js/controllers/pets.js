@@ -69,7 +69,7 @@
 		    self.filtered = filteredPets;
 		    self.calculatePages(false);
  		}, true);
-		self.chooseCategory = function($event, index) {
+		self.chooseCategory = function(index) {
 			self.category = (index > -1) ? self.categories[index] : "";
 
 			self.categoriesClass = ['','','',''];
@@ -91,7 +91,7 @@
 
 		//control modal
 		self.openPetDetailsModal = function(pet) {
-			self.clickedPet = pet;
+			self.clickedPet = Object.create(pet);
 			$('#petDetailsModal').modal('toggle');
 		}
 		self.closePetDetailsModal = function() {
