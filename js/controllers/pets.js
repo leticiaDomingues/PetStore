@@ -5,17 +5,16 @@
 		.module('app')
 		.controller('PetsController', petsController);
 
-	petsController.$inject = ['$scope','PetsService', 'PetsHttp'];
+	petsController.$inject = ['$scope','PetsService'];
 
 	function petsController($scope, PetsService) {
 		var self = this;
 
 		//pagination var
 		$scope.currentPage = 1;
-		self.paginatedPets = [];
+		self.filtered = [];
   		self.numPerPage = 8
   		self.paginationClasses=['disabled',''];
-  		self.pages = [];
   		self.numberOfPages;
 
 
@@ -30,17 +29,9 @@
 				//fixing API bug
 				if(pet.id!=9205436248879931000)
 					self.pets.push(pet);
+
+				self.calculatePages(true);
 			});
-
-
-		    self.paginatePets();
-		    self.numberOfPages = Math.ceil(self.pets.length / self.numPerPage);
-
-		    for(let i=0; i<self.numberOfPages; i++)
-		    	self.pages[i] = (i==0) ? 'active' : '';
-
-
-		    console.log(self.pets);
 		}, function() {});
 
 		//initialize categories 
@@ -56,20 +47,14 @@
 		self.selectedFilters = [];
 
 		//control thumbnail arrows
-		self.hideArrows = function(index, mainGrid, direction) {
-			let aux = ($scope.currentPage-1) * self.numPerPage;
-			let pet = (mainGrid) ? self.pets[index+aux] : self.clickedPet;
-
+		self.hideArrows = function(pet, mainGrid, direction) {
 			if((direction == 'next' && pet!=undefined && pet.photoIndex>= pet.numberOfPhotos-1) ||
 				(direction == 'prev' && pet!=undefined && pet.photoIndex == 0))
 				return {opacity:0};
 
 			return {opacity:1};
 		}
-		self.changeImage = function(index, mainGrid, direction) {
-			let aux = ($scope.currentPage-1) * self.numPerPage;
-			let pet = (mainGrid) ? self.pets[index+aux] : self.clickedPet;
-
+		self.changeImage = function(pet, mainGrid, direction) {
 			if(direction=='next') {
 				if(pet.photoIndex < pet.numberOfPhotos)
 					pet.photoIndex++;
@@ -80,12 +65,18 @@
 		};
 
 		//control categories and filters
+		$scope.$watch("petsCtrl.pets |  filter:search | filter: petsCtrl.category |selectFilters:petsCtrl.selectedFilters", function(filteredPets) {
+		    self.filtered = filteredPets;
+		    self.calculatePages(false);
+ 		}, true);
 		self.chooseCategory = function($event, index) {
 			self.category = (index > -1) ? self.categories[index] : "";
 
 			self.categoriesClass = ['','','',''];
 			self.categoriesClass[index+1] = 'bold';
 
+			self.calculatePages(false);
+			self.changePage(1);
 		}
 		self.chooseFilter = function(filter) {
 			let index = self.selectedFilters.indexOf(filter);
@@ -94,12 +85,13 @@
 				self.selectedFilters.splice(index, 1);
 			else
 				self.selectedFilters.push(filter);
+
+			self.changePage(1);
 		}
 
 		//control modal
-		self.openPetDetailsModal = function(index) {
-			let aux = ($scope.currentPage-1) * self.numPerPage;
-			self.clickedPet = self.pets[index+aux];
+		self.openPetDetailsModal = function(pet) {
+			self.clickedPet = pet;
 			$('#petDetailsModal').modal('toggle');
 		}
 		self.closePetDetailsModal = function() {
@@ -107,14 +99,19 @@
 		}
 
 		//control pagination
-		$scope.$watch("currentPage", function() {
-		     self.paginatePets();
- 		});
- 		self.paginatePets = function() {
- 			let begin = (($scope.currentPage - 1) * self.numPerPage);
-		   	let end = begin + self.numPerPage;
+ 		self.calculatePages = function(all) {
+ 			let numOfPets = (all) ? self.pets.length : self.filtered.length;
+ 			self.numberOfPages = Math.ceil(numOfPets / self.numPerPage);
 
-		    self.paginatedPets = self.pets.slice(begin, end);
+ 			self.pages = [];
+		    for(let i=0; i<self.numberOfPages; i++)
+		    	self.pages[i] = (i==$scope.currentPage-1) ? 'active' : '';
+
+		    self.paginationClasses=['disabled','disabled']
+			if(self.numberOfPages > 1) {
+				if($scope.currentPage == self.pages.length) self.paginationClasses=['','disabled'];
+				if($scope.currentPage == 1) self.paginationClasses=['disabled',''];
+			}
  		}
 		self.changePage = function(index) {
 			switch(index) {
@@ -125,11 +122,10 @@
 				default: $scope.currentPage = index;
 			}
 
-			if($scope.currentPage == self.pages.length) self.paginationClasses=['','disabled'];
-			if($scope.currentPage == 1) self.paginationClasses=['disabled',''];
-			for(let i=0; i<self.numberOfPages; i++) {
-		    	self.pages[i] = (i==$scope.currentPage-1) ? 'active' : '';
-			}
+			self.calculatePages(false);			
+		}
+		self.paginateWithFilter = function() {
+			$scope.currentPage = 1;
 		}
 	}
 })();

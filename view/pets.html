@@ -42,20 +42,19 @@
 	</div>
 	<div class="store-inventory">
 		<div class="row">
-			<div class="col-3 pet-info-small" ng-repeat="pet in petsCtrl.paginatedPets | filter:search | filter: petsCtrl.category |selectFilters:petsCtrl.selectedFilters">
+			<div class="col-3 pet-info-small" ng-repeat="pet in petsCtrl.filtered | slice:(currentPage-1)*8 : currentPage*8">
 				<div class="pet-thumbnail-div">
-					<span  ng-click="petsCtrl.changeImage($index, true, 'prev')" ng-style="petsCtrl.hideArrows($index, true, 'prev')"><i class="left-arrow fa fa-angle-left" aria-hidden="true"></i></span>
+					<span  ng-click="petsCtrl.changeImage(pet, true, 'prev')" ng-style="petsCtrl.hideArrows(pet, true, 'prev')"><i class="left-arrow fa fa-angle-left" aria-hidden="true"></i></span>
 			    	<img ng-src="{{pet.photoUrls[pet.photoIndex]}}" class="pet-thumbnail-small">
-			    	<span  ng-click="petsCtrl.changeImage($index, true, 'next')" ng-style="petsCtrl.hideArrows($index, true, 'next')"><i class="right-arrow fa fa-angle-right" aria-hidden="true" ></i></span>
+			    	<span  ng-click="petsCtrl.changeImage(pet, true, 'next')" ng-style="petsCtrl.hideArrows(pet, true, 'next')"><i class="right-arrow fa fa-angle-right" aria-hidden="true" ></i></span>
 			    </div>
 		    	<p class="bold">{{pet.name}}</p>
 		    	<p class="pet-info-category">{{pet.category.name}}</p>
-		    	<button class="btn btn-outline-secondary pet-info-button" ng-click="petsCtrl.openPetDetailsModal($index)">Ver detalhes</button>
+		    	<button class="btn btn-outline-secondary pet-info-button" ng-click="petsCtrl.openPetDetailsModal(pet)">Ver detalhes</button>
 		    </div>		    
 		 </div>
 	</div>
 
-	
 	<!-- Pagination -->
 	<nav aria-label="Page navigation example">
 	  <ul class="pagination justify-content-center" ng-model="currentPage">
@@ -81,9 +80,9 @@
 	      </div>
 	      <div class="modal-body row">
 	      	<div class="pet-modal-picture col-6">
-	      		<span  ng-click="petsCtrl.changeImage($index, false, 'prev')" ng-style="petsCtrl.hideArrows($index, false,'prev')"><i class="left-arrow fa fa-angle-left" aria-hidden="true"></i></span>
+	      		<span  ng-click="petsCtrl.changeImage(petsCtrl.clickedPet, false, 'prev')" ng-style="petsCtrl.hideArrows(petsCtrl.clickedPet, false,'prev')"><i class="left-arrow fa fa-angle-left" aria-hidden="true"></i></span>
 	      		<img ng-src="{{petsCtrl.clickedPet.photoUrls[petsCtrl.clickedPet.photoIndex]}}" class="pet-modal-img">
-	      		<span  ng-click="petsCtrl.changeImage($index, false, 'next')" ng-style="petsCtrl.hideArrows($index, false,'next')"><i class="right-arrow fa fa-angle-right" aria-hidden="true" ></i></span>
+	      		<span  ng-click="petsCtrl.changeImage(petsCtrl.clickedPet, false, 'next')" ng-style="petsCtrl.hideArrows(petsCtrl.clickedPet, false,'next')"><i class="right-arrow fa fa-angle-right" aria-hidden="true" ></i></span>
 	      	</div>			    	
 	      	<div class="pet-modal-body col-6">
 		        <p class="p-without-margin-bottom"><span class='bold'>Nome: </span> {{petsCtrl.clickedPet.name}}</p>
