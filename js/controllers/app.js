@@ -10,6 +10,7 @@
 	function appController($scope, PetsHttp, $location, $localStorage) {
 		var self = this;
 		$scope.currentUser = $localStorage.user;
+		$scope.pets = [];
 
 		self.activeClass=['active', ''];
 
@@ -24,6 +25,11 @@
 
 		self.changeActiveClass = function(index) {
 			self.activeClass=(index==0) ? ['active', ''] : ['','active'];
+		}
+
+		self.refresh = function() {
+			$scope.$broadcast ('cleanFilters');     
+			self.changeActiveClass(0);
 		}
 	}
 })();

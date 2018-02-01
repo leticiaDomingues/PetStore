@@ -29,7 +29,7 @@
 		}
 
 		function makePetOrder(order, pet) {
-			//updatePetStatus(pet);
+			updatePetStatus(pet);
 		    return $http.post(baseUrl + '/store/order', order);
 		}
 

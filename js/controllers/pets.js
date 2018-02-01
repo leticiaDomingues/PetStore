@@ -16,7 +16,7 @@
   		self.numPerPage = 8
   		self.paginationClasses=['disabled',''];
   		self.numberOfPages;
-
+  		self.noPetsAvailable = 'display-none';
 
 		//get pets from API
 		self.pets = [];
@@ -46,6 +46,11 @@
 		self.filters.gender = ['Fêmea', 'Macho'];
 		self.selectedFilters = [];
 
+		$scope.$on('cleanFilters', function() {  
+	   		self.chooseCategory(-1);   
+	   		self.selectedFilters = [];  
+	    });
+
 		//control thumbnail arrows
 		self.hideArrows = function(pet, mainGrid, direction) {
 			if((direction == 'next' && pet!=undefined && pet.photoIndex>= pet.numberOfPhotos-1) ||
@@ -68,6 +73,10 @@
 		$scope.$watch("petsCtrl.pets |  filter:search | filter: petsCtrl.category |selectFilters:petsCtrl.selectedFilters", function(filteredPets) {
 		    self.filtered = filteredPets;
 		    self.calculatePages(false);
+		    if(self.filtered.length == 0)
+		    	self.noPetsAvailable = '';
+		    else 
+		    	self.noPetsAvailable = 'display-none';
  		}, true);
 		self.chooseCategory = function(index) {
 			self.category = (index > -1) ? self.categories[index] : "";
@@ -107,8 +116,9 @@
 		    for(let i=0; i<self.numberOfPages; i++)
 		    	self.pages[i] = (i==$scope.currentPage-1) ? 'active' : '';
 
-		    self.paginationClasses=['disabled','disabled']
-			if(self.numberOfPages > 1) {
+		    if(self.numberOfPages==0) self.paginationClasses=['display-none','display-none'];
+		    else if(self.numberOfPages==0) self.paginationClasses=['disabled','disabled'];
+			else {
 				if($scope.currentPage == self.pages.length) self.paginationClasses=['','disabled'];
 				if($scope.currentPage == 1) self.paginationClasses=['disabled',''];
 			}
