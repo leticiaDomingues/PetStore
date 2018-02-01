@@ -1,0 +1,56 @@
+<div ng-controller='MyProfileController as mProfileCtrl' class="main-div ">
+	<div class='pet-title'>
+		<h2>Meu perfil</h2>
+	</div>
+	<form class='signup-form margin-top-3' name='myProfileForm' novalidate ng-submit="myProfileForm.$valid && mProfileCtrl.edit()">
+		<div class="form-group">
+	  		<div class='col-5 inline-block no-padding little-padding'>
+			    <input type="text" class="form-control"  placeholder="Nome" ng-model="mProfileCtrl.user.firstName" required maxlength='{{mProfileCtrl.maxLength[0]}}' ng-class="mProfileCtrl.ngDirtyWhenSubmitted">
+			    <span class='field-error no-padding'>Campo obrigatório.</span>
+			</div>
+			<div class='col-6 inline-block no-padding little-padding'>
+			    <input type="text" class="form-control"  placeholder="Sobrenome" ng-model="mProfileCtrl.user.lastName" required maxlength='{{mProfileCtrl.maxLength[1]}}' ng-class="mProfileCtrl.ngDirtyWhenSubmitted">
+			    <span class='field-error no-padding'>Campo obrigatório.</span>
+			</div>
+  		</div>
+  		<div class="form-group">
+		    <input type="email" class="form-control col-11 inline-block input-email" aria-describedby="emailHelp" placeholder="Email" ng-model="mProfileCtrl.user.email" required maxlength='{{mProfileCtrl.maxLength[2]}}' ng-class="mProfileCtrl.ngDirtyWhenSubmitted">
+		    <small class="form-text text-muted">Seu email permanecerá confidencial dentro da aplicação.</small>
+		    <span class='field-error no-padding center'>Campo obrigatório.</span>
+		    <p class='field-error-email no-padding center'>Informe um email válido. Ex: email@gmail.com</p>
+  		</div>
+  		<div class="form-group">
+  			<div class='form-row center-flex '>
+		  		<div class='col-5 no-padding input-group'>
+				    <div class="input-group-prepend">
+					    <span class="input-group-text"><i class="fas fa-user"></i></span>
+					</div>
+					<input type="text" class="form-control input-username" placeholder="Username" aria-label="Username" ng-model="mProfileCtrl.user.username" required maxlength='{{mProfileCtrl.maxLength[3]}}' ng-class="mProfileCtrl.ngDirtyWhenSubmitted" disabled>
+					<span class='field-error center no-padding'>Campo obrigatório.</span>
+				</div>
+				<div class='col-6 no-padding input-group '>
+				    <div class="input-group-prepend">
+					    <span class="input-group-text"><i class="fa fa-lock"></i></span>
+					</div>
+					<input type="password" class="form-control input-password" placeholder="Senha" aria-label="Senha" ng-model="mProfileCtrl.user.password" required maxlength='{{mProfileCtrl.maxLength[4]}}' ng-class="mProfileCtrl.ngDirtyWhenSubmitted">
+					<span class='field-error center width-30 no-padding'>Campo obrigatório.</span>
+				</div>
+			</div>
+  		</div>
+  		<div class='signup-error form-group margin-top-3' ng-style="mProfileCtrl.messages[0]">
+	  		<div class="col-11 signup-button-div inline-block no-padding red-font">
+				Ocorreu um erro ao processar a solicitação. Tente novamente mais tarde.
+			</div>
+		</div>
+		<div class='alert-placeholder' ng-style="mProfileCtrl.messages[1]">
+			<div class="alert alert-success alert-dismissable col-11 margin-auto">
+			  Seu perfil foi editado com sucesso.
+			</div>
+		</div>
+  		<div class='form-group margin-top-3'>
+	  		<div class="col-11 signup-button-div inline-block no-padding align-right">
+				<button type='submit' class='btn btn-secondary signup-button' ng-click="mProfileCtrl.dirtyWhenSubmitted()">Editar</button>
+			</div>
+		</div>
+	</form>
+</div>

@@ -28,6 +28,9 @@
 			})
 			.when('/searchOrder', {
 				templateUrl : 'view/search-order.html'
+			})
+			.when('/myProfile', {
+				templateUrl : 'view/my-profile.html'
 			});
 	}
 })();

@@ -12,7 +12,7 @@
 		$scope.currentUser = $localStorage.user;
 		$scope.pets = [];
 
-		self.activeClass=['active', ''];
+		self.activeClass=['active', '',''];
 
 		self.logout = function() {
 			//remove as variaveis de sessao
@@ -24,7 +24,11 @@
 		}
 
 		self.changeActiveClass = function(index) {
-			self.activeClass=(index==0) ? ['active', ''] : ['','active'];
+			switch(index) {
+				case 0: self.activeClass = ['active', '', ''];break;
+				case 1: self.activeClass = ['', 'active', ''];break;
+				case 2: self.activeClass = ['', '', 'active'];break;
+			}
 		}
 
 		self.refresh = function() {

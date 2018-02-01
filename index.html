@@ -12,6 +12,7 @@
 </head>
 <body ng-app='app'>
 	<div ng-controller='AppController as appCtrl'>
+
 		<!-- Menu -->
 		<nav class="navbar navbar-light bg-light">
 			<a class="navbar-brand" href="#/" ng-click="appCtrl.refresh()">
@@ -25,6 +26,9 @@
 			      </li>
 			      <li class="nav-item" ng-class="appCtrl.activeClass[1]" ng-click='appCtrl.changeActiveClass(1)'>
 			        <a class="nav-link" href="#/searchOrder/" >Pedidos</a>
+			      </li>
+			      <li class="nav-item" ng-class="appCtrl.activeClass[2]" ng-click='appCtrl.changeActiveClass(2)'>
+			        <a class="nav-link" href="#/myProfile" >Meu Perfil</a>
 			      </li>
 			    </ul>
 			  </div>
@@ -71,5 +75,6 @@
 	<script src="js/controllers/search-order.js"></script>
 	<script src="js/controllers/login.js"></script>
 	<script src="js/controllers/signup.js"></script>
+	<script src="js/controllers/my-profile.js"></script>
 </body>
 </html>

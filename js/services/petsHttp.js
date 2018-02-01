@@ -50,6 +50,16 @@
 	        });
 		};
 
+		function getUser(username) {
+			 return $http.get(baseUrl + '/user/' + username).then(function(result){
+	        	return result.data;
+	        });
+		};
+
+		function editUser(username, user) {
+			return $http.put(baseUrl + '/user/' + username, user);
+		};
+
 		function originalLogin(user) {
 			$http({
 			    url: baseUrl + '/user/login', 
@@ -74,7 +84,9 @@
 			makePetOrder : makePetOrder,
 			getPet : getPet,
 			getOrder : getOrder,
-			signup : signup
+			signup : signup,
+			getUser : getUser,
+			editUser : editUser
 		};
 	}
 })();
