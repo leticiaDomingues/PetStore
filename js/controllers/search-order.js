@@ -66,7 +66,6 @@
 			}
 		};
 		self.hideArrows = function(pet, direction) {
-			console.log(pet);
 			if((direction == 'next' && pet != undefined && pet.photoIndex >= pet.photoUrls.length-1) ||
 				(direction == 'prev' && pet != undefined && pet.photoIndex == 0))
 				return {opacity:0};

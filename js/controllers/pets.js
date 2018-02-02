@@ -40,6 +40,9 @@
 
 				
 			});
+
+			//sort alphabetically
+			self.pets.sort(function(a, b){ if(a.name < b.name) return -1; if(a.name > b.name) return 1; return 0;});
 		}, function(){}); 
 
 		//initialize categories 
@@ -86,6 +89,7 @@
 		    	self.noPetsAvailable = '';
 		    else 
 		    	self.noPetsAvailable = 'display-none';
+
  		}, true);
 		self.chooseCategory = function(index) {
 			self.category = (index > -1) ? self.categories[index] : "";
