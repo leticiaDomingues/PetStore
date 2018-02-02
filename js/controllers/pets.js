@@ -29,7 +29,7 @@
 				pet.numberOfPhotos = pet.photoUrls.length;
 
 				//fixing API bug
-				if(pet.id!=9205436248879931000) {
+				if(pet.id!=9205436248879931000 && pet.id!=9205436248879933620) {
 					self.pets.push(pet);
 
 					if(self.filters.breed.indexOf(pet.tags[0].name.toLowerCase()) == -1)
@@ -40,6 +40,7 @@
 
 				
 			});
+			console.log(self.pets);
 		}, function(){}); 
 
 		//initialize categories 

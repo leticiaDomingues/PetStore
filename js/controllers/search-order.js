@@ -5,54 +5,70 @@
 		.module('app')
 		.controller('SearchOrderController', searchOrderController);
 
-	searchOrderController.$inject = ['PetsHttp','$location', '$localStorage'];
+	searchOrderController.$inject = ['$scope', 'PetsHttp','$location', '$localStorage', 'UserOrdersHttp'];
 
-	function searchOrderController(PetsHttp, $location, $localStorage) {
+	function searchOrderController($scope, PetsHttp, $location, $localStorage, UserOrdersHttp) {
 		var self = this;
 		self.photoIndex=0;
-		self.showPet = {display:'none'};
 		self.showError = {display:'none'};
+		self.orders = [];
+		self.user = $localStorage.user;
 
-
-		self.searchOrder = function() {
-			if(self.orderId != undefined && self.orderId != "") {
-				//get - order and pet info
-				let promise = PetsHttp.getOrder(self.orderId);
-				promise.then(function(data) {
-					self.order = data;
-					self.order.shipDate = self.formatDate(self.order.shipDate);
-
-					let promise = PetsHttp.getPet(self.order.petId);
-					
-					self.showPet = {display:'flex'};
-					self.showError = {display:'none'};
-					promise.then(function(data) {
-						self.pet = data;
-				    }, function(){}); 
-			    }, function(){
-			    	self.showPet = {display:'none'};
-					self.showError = {display:'inline-block'};
-			    });
-			} else {
-				self.showPet = {display:'none'};
-				self.showError = {display:'none'};
+		//redirect to the home page if user is not logged-in
+		if(!$localStorage.user)
+			$location.path('/');
+		
+		//get orders by user
+		let promise = UserOrdersHttp.getOrders(self.user.username);
+		promise.then(function(result) {
+			if(result == 'null') {
+				self.showError = {display:'inline-block'};
 			}
-		};
+			else {
+				self.showError = {display:'none'};
+				for(let order in result) {
+				   let promise = PetsHttp.getOrder(order);
+					promise.then(function(data) {
+						data.shipDate = self.formatDate(data.shipDate);
+						self.orders.push(data);
+
+						self.orders.forEach(function(o) { 
+							let promise = PetsHttp.getPet(o.petId);
+							promise.then(function(d) {
+								o.pet = d;
+								o.pet.photoIndex = 0;
+						    }, function(){}); 						
+						});
+				    }, function(){}); 
+				}
+			}
+	    }, function(){}); 
+
+		//watch orders variable, to display error messages when necessary.
+	    $scope.$watch("sOrderCtrl.orders |  filter:sOrderCtrl.orderId ", function(filtered) {
+		    self.filteredOrders = filtered;
+
+		    if(self.filteredOrders.length == 0)
+		    	self.showError = {display:'block'};
+		    else 
+		    	self.showError = {display:'none'};
+ 		}, true);
 
 		//control thumbnail arrows
-		self.changeImage = function(direction) {
+		self.changeImage = function(pet, direction) {
 			if(direction=='next') {
-				if(self.photoIndex < self.pet.photoUrls.length) 
-					self.photoIndex++;
+				if(pet.photoIndex < pet.photoUrls.length) 
+					pet.photoIndex++;
 			}
 			else if(direction=='prev') {
-				if(self.photoIndex > 0)
-					self.photoIndex--;
+				if(pet.photoIndex > 0)
+					pet.photoIndex--;
 			}
 		};
-		self.hideArrows = function(direction) {
-			if((direction == 'next' && self.pet != undefined && self.photoIndex >= self.pet.photoUrls.length-1) ||
-				(direction == 'prev' && self.pet != undefined && self.photoIndex == 0))
+		self.hideArrows = function(pet, direction) {
+			console.log(pet);
+			if((direction == 'next' && pet != undefined && pet.photoIndex >= pet.photoUrls.length-1) ||
+				(direction == 'prev' && pet != undefined && pet.photoIndex == 0))
 				return {opacity:0};
 
 			return {opacity:1};

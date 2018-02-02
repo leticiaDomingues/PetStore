@@ -220,3 +220,11 @@
 	padding: 3rem;
 }
 
+.orders-body {
+	display: flex;
+}
+
+.search-order-image {
+	width:14rem;
+	height:12rem;
+}

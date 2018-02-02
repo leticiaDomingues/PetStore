@@ -1,30 +1,33 @@
 <div ng-controller='SearchOrderController as sOrderCtrl' class="main-div pet-title">
-	<h2>Busca de pedidos</h2>
+	<h2>Meus pedidos</h2>
 	<div class="input-group mb-3 margin-top">
 		<div class="input-group-prepend">
 	    	<span class="input-group-text"><i class="fa fa-search"></i></span>
 	  	</div>
-	  	<input type="text" class="form-control" placeholder="Número do pedido" aria-label="Username" ng-model="sOrderCtrl.orderId" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
-	  	<button class="btn btn-secondary search-order-button" ng-click="sOrderCtrl.searchOrder()">Pesquisar</button>
+	  	<input type="text" class="form-control" placeholder="Buscar..." ng-model="sOrderCtrl.orderId">
 	</div>
-	<div class='order-not-found' ng-style="sOrderCtrl.showError">
-		O pedido não foi encontrado. Verifique o número e tente novamente.
+	<div class='margin-top' ng-style="sOrderCtrl.showError">
+		Não existem pedidos.
 	</div>
-	<div class="pet-order-body pet-body" ng-style="sOrderCtrl.showPet">
-		<div class="pet-order-image-div col-5 offset-1">
-			<div class='div-inline-block' ng-click='sOrderCtrl.changeImage("prev")' ng-style="sOrderCtrl.hideArrows('prev')"><i class="left-arrow arrows fa fa-angle-left" aria-hidden="true"></i></div>
-			<img ng-src="{{sOrderCtrl.pet.photoUrls[sOrderCtrl.photoIndex]}}" class="pet-order-image">
-			<div class='div-inline-block' ng-click='sOrderCtrl.changeImage("next")' ng-style="sOrderCtrl.hideArrows('next')"><i class="right-arrow arrows fa fa-angle-right" aria-hidden="true"></i></div>	    	
-		</div>
-		<div class="pet-order-details div-inline-block col-5">
-			<p class="p-few-margin-bottom"><span class='bold'>Nome: </span> {{sOrderCtrl.pet.name}}</p>
-	        <p class="pet-info-category"><span class='bold'>Categoria: </span> {{sOrderCtrl.pet.category.name}}</p>
-			<p class="p-few-margin-bottom"><span class='bold'>Raça: </span> {{sOrderCtrl.pet.tags[0].name}}</p>
-			<p class="p-few-margin-bottom"><span class='bold'>Idade: </span> {{sOrderCtrl.pet.tags[1].name}}</p>
-			<p><span class='bold'>Sexo: </span> {{sOrderCtrl.pet.tags[2].name}}</p>
-			<p class="p-few-margin-bottom"><span class='bold'>Número da compra: </span> {{sOrderCtrl.order.id}}</p>
-			<p class="p-few-margin-bottom"><span class='bold'>Data de entrega: </span> {{sOrderCtrl.order.shipDate}}</p>
-			<p class="p-few-margin-bottom pet-info-category"><span class='bold'>Status: </span> {{sOrderCtrl.order.status}}</p>
-		</div>
+	<div>
+		<div class="row margin-bottom-3">
+			<div class="col-6 text-left orders-body pet-body margin-top-3" ng-repeat="order in sOrderCtrl.filteredOrders">
+				<div class="pet-order-image-div col-6">
+					<div class='div-inline-block' ng-click='sOrderCtrl.changeImage(order.pet, "prev")' ng-style="sOrderCtrl.hideArrows(order.pet, 'prev')"><i class="left-arrow arrows fa fa-angle-left" aria-hidden="true"></i></div>
+					<img ng-src="{{order.pet.photoUrls[order.pet.photoIndex]}}" class="search-order-image">
+					<div class='div-inline-block' ng-click='sOrderCtrl.changeImage(order.pet,"next")' ng-style="sOrderCtrl.hideArrows(order.pet, 'next')"><i class="right-arrow arrows fa fa-angle-right" aria-hidden="true"></i></div>	
+				</div>
+				<div class="div-inline-block col-6 font-size-8">
+					<p class="p-few-margin-bottom"><span class='bold'>Nome: </span> {{order.pet.name}}</p>
+			        <p class="pet-info-category"><span class='bold'>Categoria: </span> {{order.pet.category.name}}</p>
+					<p class="p-few-margin-bottom"><span class='bold'>Raça: </span> {{order.pet.tags[0].name}}</p>
+					<p class="p-few-margin-bottom"><span class='bold'>Idade: </span> {{order.pet.tags[1].name}}</p>
+					<p><span class='bold'>Sexo: </span> {{order.pet.tags[2].name}}</p>
+					<p class="p-few-margin-bottom"><span class='bold'>Número da compra: </span> {{order.id}}</p>
+					<p class="p-few-margin-bottom"><span class='bold'>Data de entrega: </span> {{order.shipDate}}</p>
+					<p class="p-few-margin-bottom pet-info-category"><span class='bold'>Status: </span> <span class='order-{{order.status}}'>{{order.status}}</span></p>
+				</div>
+		    </div>		    
+		 </div>
 	</div>
 </div>

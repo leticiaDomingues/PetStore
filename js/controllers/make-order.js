@@ -5,9 +5,9 @@
 		.module('app')
 		.controller('MakeOrderController', makeOrderController);
 
-	makeOrderController.$inject = ['PetsHttp', '$routeParams', '$location', '$localStorage'];
+	makeOrderController.$inject = ['PetsHttp', '$routeParams', '$location', '$localStorage', 'UserOrdersHttp'];
 
-	function makeOrderController(PetsHttp, $routeParams, $location, $localStorage) {
+	function makeOrderController(PetsHttp, $routeParams, $location, $localStorage, UserOrdersHttp) {
 		var self = this;
 
 		self.photoIndex=0;
@@ -38,7 +38,7 @@
 				petId : self.pet.id,
 				quantity : 1,
 				shipDate : self.shipDate,
-				status : "placed",
+				status : "enviado",
 				complete : false
 			};
 
@@ -49,6 +49,10 @@
 
 				//success - order placed
 				promise.then(function(success) {
+					//associate order with userid
+					UserOrdersHttp.addOrder(user.username, order.id);
+
+					//redirect to view: orderPlaced 
 					$location.path('/orderPlaced/' + order.id);
 			    }, function(data){}); 
 			} else {
