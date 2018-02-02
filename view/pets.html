@@ -9,7 +9,7 @@
 		  	<input type="text" class="form-control search-field" placeholder="Buscar..." aria-label="Buscar" ng-model="search">
 			<div class="dropdown">
 			  <button class="btn btn-secondary dropdown-toggle no-border-radius" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			    Categoria
+			    {{petsCtrl.selectedCategory}}
 			  </button>
 			  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
 			  	<span class="dropdown-item link" ng-click="petsCtrl.chooseCategory(-1)" ng-class="petsCtrl.categoriesClass[0]">- Todas -</span>

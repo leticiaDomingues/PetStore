@@ -46,6 +46,7 @@
 		//initialize categories 
 		self.categories = ['Cachorro', 'Gato', 'Hamister'];
 		self.category = "";
+		self.selectedCategory = 'Categoria';
 		self.categoriesClass = ['bold', '', '', ''];
 
 		//initialize filters 
@@ -89,6 +90,7 @@
  		}, true);
 		self.chooseCategory = function(index) {
 			self.category = (index > -1) ? self.categories[index] : "";
+			self.selectedCategory = (self.category == "") ? 'Categoria' : self.category;
 
 			self.categoriesClass = ['','','',''];
 			self.categoriesClass[index+1] = 'bold';
