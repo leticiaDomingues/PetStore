@@ -31,6 +31,7 @@
 			})
 			.when('/myProfile', {
 				templateUrl : 'view/my-profile.html'
-			});
+			})
+			.otherwise({redirectTo:'/'});
 	}
 })();

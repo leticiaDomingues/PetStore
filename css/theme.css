@@ -156,3 +156,7 @@
 .order-entregue {
 	color:#008927;
 }
+
+.width-60 {
+	width: 60% !important;
+}
