@@ -40,7 +40,6 @@
 
 				
 			});
-			console.log(self.pets);
 		}, function(){}); 
 
 		//initialize categories 
@@ -95,7 +94,6 @@
 			self.categoriesClass = ['','','',''];
 			self.categoriesClass[index+1] = 'bold';
 
-			self.calculatePages(false);
 			self.changePage(1);
 		}
 		self.chooseFilter = function(filter) {
@@ -128,8 +126,8 @@
 		    	self.pages[i] = (i==$scope.currentPage-1) ? 'active' : '';
 
 		    if(self.numberOfPages==0) self.paginationClasses=['display-none','display-none'];
-		    else if(self.numberOfPages==0) self.paginationClasses=['disabled','disabled'];
-			else {
+		    else if(self.numberOfPages==1) self.paginationClasses=['disabled','disabled'];
+		    else {
 				if($scope.currentPage == self.pages.length) self.paginationClasses=['','disabled'];
 				if($scope.currentPage == 1) self.paginationClasses=['disabled',''];
 			}
@@ -144,9 +142,6 @@
 			}
 
 			self.calculatePages(false);			
-		}
-		self.paginateWithFilter = function() {
-			$scope.currentPage = 1;
 		}
 	}
 })();
